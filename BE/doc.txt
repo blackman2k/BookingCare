@@ -1,0 +1,34 @@
+body-parser: viet api o server
+dotenv: lay tham so moi truong
+ejs: view engine
+express: framework
+
+npm install --save-dev @babel/core@7.12.10 @babel/preset-env@7.12.10 @babel/node@7.12.10 nodemon@2.0.7
+babel: bien dich
+nodemon: autoreload when save
+
+
+npm install --save sequelize@6.6.2
+npm install --save-dev sequelize-cli@6.2.0
+cd src
+npx sequelize-cli init
+
+--sequelizemeta save history
+
+npm install --save mysql2@2.2.5
+
+src
+--config // cấu hình()
+--controllers //
+--migrations
+--models
+--pulic
+--route
+--seeders
+--services
+--views
+
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+
+npm install --save bcryptjs@2.4.3

@@ -1,0 +1,122 @@
+$color-primary: #267FFF;
+$color-text-sub: #ACB9CB;
+$color-title: #31507D;
+
+.login {
+    height: 100vh;
+    background: #F2F6FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+
+    .login-container {
+        width: 100%;
+        max-width: 500px;
+        height: max-content;
+
+        background: #fff;
+        border-radius: 10px;
+        padding: 40px;
+
+        .login-content {
+
+            .form-group {
+                width: 100%;
+                display: flex;
+                border: 1px solid #ecf0f1;
+                border-radius: 10px;
+                padding: 10px;
+                margin-bottom: 40px;
+
+                .icon-container {
+                    margin-right: 10px;
+                    i {
+                        color: #267FFF;
+                        font-size: 20px;
+                        height: 100%;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+
+                input {
+                    flex: 1;
+                    border: 0;
+                    outline: 0;
+
+                    padding: 3px;
+                    font-size: 16px;
+
+                    &::placeholder {
+                        font-weight: 500;
+                        color: #556F94;
+                    }
+                }
+            }
+
+            h2 {
+                color: $color-title;
+            }
+
+            p {
+                color: $color-text-sub;
+                margin-bottom: 40px;
+            }
+
+            button {
+                display: block;
+                width: 100%;
+                border: 0;
+                outline: 0;
+                background: $color-primary;
+                padding: 15px;
+                border-radius: 15px;
+                font-size: 17px;
+                color: #fff;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .login-options {
+        margin-top: 30px;
+        text-align: center;
+
+        > p {
+            color: #ACB9CB;
+
+            a {
+                color: #267FFF;
+                font-weight: 500;
+            }
+        }
+
+        .social-login {
+
+            p {
+                font-weight: 500;
+                color: $color-text-sub;
+            }
+
+            .social-login-wrap {
+
+                a {
+                    font-size: 30px;
+                    margin: 0 10px;
+
+                    &:first-child {
+                        color: #0C73FB;
+                    }
+                    &:last-child {
+                        color: red;
+                    }
+                }
+            }
+           
+        }
+    }
+}
