@@ -66,6 +66,11 @@ $color-title: #31507D;
                 color: $color-text-sub;
                 margin-bottom: 40px;
             }
+            span.error-message {
+                display: inline-block;
+                color: red;
+                margin-bottom: 10px;
+            }
 
             button {
                 display: block;

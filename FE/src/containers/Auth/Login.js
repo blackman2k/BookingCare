@@ -6,13 +6,16 @@ import * as actions from "../../store/actions";
 import "./Login.scss";
 import { times } from "lodash";
 
+import { userService } from "../../services";
+
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
       password: "",
-      isShowPassword: false
+      isShowPassword: false,
+      errMessage: ''
     };
   }
 
@@ -27,7 +30,20 @@ class Login extends Component {
     });
   };
 
-  handleLogin = (event) => { };
+  handleLogin = async (event) => {
+    this.setState({
+      errMessage: ''
+    })
+    try {
+      const result = await userService.handleLogin(this.state.username, this.state.password)
+      alert("Dang nhap thanh cong")
+    } catch (e) {
+      this.setState({
+        errMessage: e.response.data.message
+      })
+    }
+
+  };
 
   handleClickShowPassword = () => {
     this.setState((prev) => ({
@@ -76,10 +92,14 @@ class Login extends Component {
                 }}
               />
             </div>
+            {
+              this.state.errMessage &&
+              <span className="error-message">{this.state.errMessage}</span>
+            }
             <button
-              type="submit"
+              type="button"
               onClick={(event) => {
-                this.handleLogin();
+                this.handleLogin(event);
               }}
             >
               Sign In

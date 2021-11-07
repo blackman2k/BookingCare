@@ -13,12 +13,22 @@ const handleLogin = async (req, res) => {
         })
     }
 
-    let user = await userService.handleUserLogin(email, password);
-    return res.status(200).json({
-        errCode: user.errCode,
-        message: user.errMessage,
-        user: user.userData ? user.userData : {}
-    })
+    let output = await userService.handleUserLogin(email, password);
+    if (output.errCode === 0) {
+        return res.status(200).json({
+            errCode: output.errCode,
+            message: output.errMessage,
+            data: {
+                ...output.data
+            }
+        })
+    } else {
+        return res.status(500).json({
+            errCode: output.errCode,
+            message: output.errMessage,
+            data: {}
+        })
+    }
 }
 
 const userController = {
