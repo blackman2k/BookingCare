@@ -73,19 +73,25 @@ const findUserByEmail = (userEmail) => {
 
 const getAllUsers = (userID) => {
     return new Promise(async (resole, reject) => {
-        console.log("userID: ".userID)
+        console.log("userID: ", userID)
         try {
             let users = ''
             if (userID === 'ALL') {
                 users = await db.User.findAll({
+                    attributes: {
+                        exclude: ['password']
+                    }
                 })
             }
             if (userID && userID !== 'ALL') {
                 users = await db.User.findOne({
                     where: { id: userID },
-                    raw: true
+                    attributes: {
+                        exclude: ['password']
+                    }
                 })
             }
+            console.log("User: ", users)
             resole(users)
         } catch (e) {
             reject(e)
