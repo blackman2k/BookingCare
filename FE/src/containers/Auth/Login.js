@@ -7,6 +7,7 @@ import "./Login.scss";
 import { times } from "lodash";
 
 import { userService } from "../../services";
+import { userLoginSuccess } from "../../store/actions";
 
 class Login extends Component {
   constructor(props) {
@@ -36,7 +37,16 @@ class Login extends Component {
     })
     try {
       const result = await userService.handleLogin(this.state.username, this.state.password)
-      alert("Dang nhap thanh cong")
+      if (result && result.errCode !== 0) {
+        this.setState({
+          errMessage: result.message
+        })
+      }
+      if (result && result.errCode === 0) {
+        this.props.userLoginSuccess(result.data)
+        console.log("Login succesd")
+      }
+
     } catch (e) {
       this.setState({
         errMessage: e.response.data.message
@@ -67,7 +77,7 @@ class Login extends Component {
               <input
                 type="text"
                 name="username"
-                placeholder="Enter your username"
+                placeholder="Enter your email"
                 value={this.state.username}
                 onChange={(event) => {
                   this.handleOnChangeUsername(event);
@@ -137,9 +147,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    adminLoginSuccess: (adminInfo) =>
-      dispatch(actions.adminLoginSuccess(adminInfo)),
-    adminLoginFail: () => dispatch(actions.adminLoginFail()),
+    userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo))
   };
 };
 

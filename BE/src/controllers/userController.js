@@ -31,8 +31,20 @@ const handleLogin = async (req, res) => {
     }
 }
 
+const handleGetAllUsers = async (req, res) => {
+    let id = req.body.id //ALL, id
+    let users = await userService.getAllUsers(id)
+
+    return res.status(200).json({
+        errCode: 0,
+        errMessage: 'OK',
+        data: users
+    })
+}
+
 const userController = {
-    handleLogin
+    handleLogin,
+    handleGetAllUsers
 }
 
 export default userController
