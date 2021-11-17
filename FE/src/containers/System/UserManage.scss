@@ -33,3 +33,36 @@
         }
     }
 }
+
+.modal-user-container {
+    .modal-header {
+        button {
+            background: transparent;
+            color: #fff;
+            border: none;
+            font-size: 25px;
+        }
+    }
+
+    .modal-user-body {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            flex-basis: calc(50% - 10px);
+            
+            input {
+                width: 100%;
+                border: 1px solid #999;
+                border-radius: 5px;
+                outline: none;
+                padding: 0 10px;
+                height: 30px;
+            }
+        }
+    }
+}
