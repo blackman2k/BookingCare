@@ -1,0 +1,167 @@
+@import "../../styles/_variables.scss";
+.homePage{
+    color: $text-color;
+
+    .homePageContent{
+        .bannerHomePage {
+            height: calc( 100vh - #{$height-header} );
+            background: url('../../assets/images/bookingcare-cover-4.jpg') no-repeat center center;
+            position: relative;
+
+            &::before {
+                position: absolute;
+                content: "";
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: #b1b1b16b;
+                z-index: 100;
+            }
+            .content {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 101;
+                position: relative;
+                .title {
+                position: relative;
+                text-align: center;
+                color: #fff;
+                font-weight: 400;
+                    h2 {
+                    line-height: 50px;
+                    text-shadow: 1px 2px #333;
+                    }
+                }
+                .search {
+                    position: relative;
+                    input {
+                        padding: 15px 20px;
+                        padding-left: 50px;
+                        width: 30vw;
+                        border-radius: 45px;
+                        border: 0;
+                        outline: 0;
+                    }
+                    i {
+                        position: absolute;
+                        left: 20px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-size: 18px;
+                        color: $primary-color;
+                    }
+                }
+                .listOptions{
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    display: flex;
+                    justify-content: center;
+                    background: linear-gradient(to top, #fff 60%, rgba(255, 255, 255, 0));
+                    padding-bottom: 40px;
+                    gap: 40px;
+                    .optionItem {
+                        text-align: center;
+                        width: 100px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        .iconOptions{
+                            $width-wrapper: 60px;
+                            width: $width-wrapper;
+                            height: $width-wrapper;
+                            border-radius: 50%;
+                            background: #fff;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            i {
+                                font-size: 30px;
+                                color: $primary-color;
+                            }
+                            svg {
+                                width: 2rem;
+                                height: 2rem;
+                                color: $primary-color;
+                            }
+                        }
+                        .titleOptions {
+                            margin-top: 5px;
+                            font-size: 17px;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    
+
+    .headerContainer {
+    height: $height-header;
+    width: 100%;
+    .headerWrapper {
+        max-width: 1140px;
+        display: flex;
+        margin: 0 auto;
+        .headerLogo{
+            display: flex;
+            align-items: center;
+            flex: 1 1;
+            i {
+                font-size: 25px;
+                color: $second-color;
+            }
+            .headerLogoImage{
+                height: 70%;
+                width: 70%;
+                background-image: url('../../assets/images/BookingCare.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                margin-left: 15px;
+            }
+        }
+        .headerList{
+            flex: 2.5 1;
+            height: $height-header;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .headerItemList{
+                p {
+                    margin: 0;
+                    color: $text-color;
+                }
+                p:last-child {
+                    font-size: 12px
+                }
+            }
+        }
+        .headerRight{
+            flex: 1 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            i {
+                font-size: 25px;
+                color: $primary-color;
+            }
+            span {
+                font-size: 16px;
+                font-weight: 500;
+                margin-left: 6px;
+                color: $sub-text-color;
+            }
+        }
+    }
+    }
+}
+
+
+
