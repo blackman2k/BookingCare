@@ -78,12 +78,25 @@ const handleDeleteUser = async (req, res) => {
 
 }
 
+const handleGetAllCode = async (req, res) => {
+    try{
+        let data = await userService.getAllCodeService(req.query.type)
+        return res.status(200).json(data)
+    } catch(e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: "Error from server"
+        })
+    }
+}
+
 const userController = {
     handleLogin,
     handleGetAllUsers,
     handleCreateNewUser,
     handleEditUser,
-    handleDeleteUser
+    handleDeleteUser,
+    handleGetAllCode
 }
 
 export default userController

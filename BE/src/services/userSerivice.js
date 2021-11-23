@@ -181,7 +181,6 @@ const updateUserData = (data) => {
                     errMessage: 'Missing requied parameters'
                 })
             }
-
             let user = await db.User.findOne({
                 where: { id: data.id }
             })
@@ -201,9 +200,30 @@ const updateUserData = (data) => {
                     message: 'User not found!'
                 })
             }
-
-
         } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+const getAllCodeService = async (typeAllCode) => {
+    return new Promise(async (resole, reject) => {
+        try{
+            if(!typeAllCode) {
+                resole({
+                    errCode: 1,
+                    errMessage: "Missing required parameters !"
+                })
+            } else {
+                let res = {}
+                let data = await db.Allcode.findAll({
+                    where: {type: typeAllCode}
+                })
+                res.errCode = 0
+                res.data = data
+                resole(res)
+            }
+        } catch(e) {
             reject(e)
         }
     })
@@ -215,7 +235,8 @@ const userService = {
     getAllUsers,
     createNewUser,
     deleteUser,
-    updateUserData
+    updateUserData,
+    getAllCodeService
 }
 
 export default userService
