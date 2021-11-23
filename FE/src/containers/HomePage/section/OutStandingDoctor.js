@@ -21,8 +21,8 @@ function SamplePrevArrow(props) {
     );
 }
 
-function Specialty() {
-
+function OutStandingDotor() {
+    console.log("styles: ", styles)
 
     const settings = {
         dots: false,
@@ -37,38 +37,55 @@ function Specialty() {
 
 
     return (
-        <div className={clsx(styles.sectionsHomePage)} >
+        <div className={clsx(styles.sectionsHomePage, styles.outStandingDoctor)} >
             <Container>
                 <div className={styles.headerSection}>
-                    <h3 className={styles.titleHeader}>Chuyên khoa phổ biến</h3>
+                    <h3 className={styles.titleHeader}>Bác sĩ nổi bật tuần qua</h3>
                     <button className={styles.btnMoreInfo}>XEM THÊM</button>
                 </div>
                 <div className={styles.bodySection}>
                     <Slider {...settings}>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Cơ Xương Khớp</h6>
+                            <h6 className={styles.nameDoctor}>Giáo sư, Tiến sĩ Hà Văn Quyết</h6>
+                            <span className={styles.positionDoctor}>Tiêu hóa</span>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Thần kinh</h6>
+                            <h6 className={styles.nameDoctor}>Giáo sư, Tiến sĩ Hà Văn Quyết</h6>
+                            <span className={styles.positionDoctor}>Tiêu hóa</span>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Tiêu hóa</h6>
+                            <h6 className={styles.nameDoctor}>Giáo sư, Tiến sĩ Hà Văn Quyết</h6>
+                            <span className={styles.positionDoctor}>Tiêu hóa</span>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Tim mạch</h6>
+                            <h6 className={styles.nameDoctor}>Giáo sư, Tiến sĩ Hà Văn Quyết</h6>
+                            <span className={styles.positionDoctor}>Tiêu hóa</span>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Tai Mũi Họng</h6>
+                            <h6 className={styles.nameDoctor}>Giáo sư, Tiến sĩ Hà Văn Quyết</h6>
+                            <span className={styles.positionDoctor}>Tiêu hóa</span>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Cột sống</h6>
+                            <h6 className={styles.nameDoctor}>Giáo sư, Tiến sĩ Hà Văn Quyết</h6>
+                            <span className={styles.positionDoctor}>Tiêu hóa</span>
                         </div>
+                        <div className={styles.itemSilder}>
+                            <div className={styles.coverItem}></div>
+                            <h6 className={styles.nameDoctor}>Giáo sư, Tiến sĩ Hà Văn Quyết</h6>
+                            <span className={styles.positionDoctor}>Tiêu hóa</span>
+                        </div>
+                        <div className={styles.itemSilder}>
+                            <div className={styles.coverItem}></div>
+                            <h6 className={styles.nameDoctor}>Giáo sư, Tiến sĩ Hà Văn Quyết</h6>
+                            <span className={styles.positionDoctor}>Tiêu hóa</span>
+                        </div>
+
 
                     </Slider>
                 </div>
@@ -77,4 +94,4 @@ function Specialty() {
     )
 }
 
-export default Specialty
+export default OutStandingDotor

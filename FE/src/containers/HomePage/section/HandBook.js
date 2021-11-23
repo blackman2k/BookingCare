@@ -21,14 +21,14 @@ function SamplePrevArrow(props) {
     );
 }
 
-function Specialty() {
-
+function HandBook() {
+    console.log("styles: ", styles)
 
     const settings = {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 2,
         slidesToScroll: 1,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />
@@ -37,38 +37,55 @@ function Specialty() {
 
 
     return (
-        <div className={clsx(styles.sectionsHomePage)} >
+        <div className={clsx(styles.sectionsHomePage, styles.handBook)} >
             <Container>
                 <div className={styles.headerSection}>
-                    <h3 className={styles.titleHeader}>Chuyên khoa phổ biến</h3>
+                    <h3 className={styles.titleHeader}>Cẩm nang</h3>
                     <button className={styles.btnMoreInfo}>XEM THÊM</button>
                 </div>
                 <div className={styles.bodySection}>
                     <Slider {...settings}>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Cơ Xương Khớp</h6>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Thần kinh</h6>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Tiêu hóa</h6>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Tim mạch</h6>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Tai Mũi Họng</h6>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Cột sống</h6>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
                         </div>
+                        <div className={styles.itemSilder}>
+                            <div className={styles.coverItem}></div>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
+                        </div>
+                        <div className={styles.itemSilder}>
+                            <div className={styles.coverItem}></div>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
+                        </div>
+                        <div className={styles.itemSilder}>
+                            <div className={styles.coverItem}></div>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
+                        </div>
+                        <div className={styles.itemSilder}>
+                            <div className={styles.coverItem}></div>
+                            <p className={styles.titleHandbook}>9 Phòng khám Răng uy tín tại TP.HCM - Review Nha khoa</p>
+                        </div>
+
 
                     </Slider>
                 </div>
@@ -77,4 +94,4 @@ function Specialty() {
     )
 }
 
-export default Specialty
+export default HandBook

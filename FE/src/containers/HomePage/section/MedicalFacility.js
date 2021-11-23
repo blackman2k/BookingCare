@@ -21,8 +21,8 @@ function SamplePrevArrow(props) {
     );
 }
 
-function Specialty() {
-
+function MedicalFacility() {
+    console.log("styles: ", styles)
 
     const settings = {
         dots: false,
@@ -37,37 +37,37 @@ function Specialty() {
 
 
     return (
-        <div className={clsx(styles.sectionsHomePage)} >
+        <div className={clsx(styles.sectionsHomePage, styles.medicalFacility)} >
             <Container>
                 <div className={styles.headerSection}>
-                    <h3 className={styles.titleHeader}>Chuyên khoa phổ biến</h3>
+                    <h3 className={styles.titleHeader}>Cơ sở y tế nổi bật</h3>
                     <button className={styles.btnMoreInfo}>XEM THÊM</button>
                 </div>
                 <div className={styles.bodySection}>
                     <Slider {...settings}>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Cơ Xương Khớp</h6>
+                            <h6 className={styles.titleItem}>Hệ thống Y tế Thu Cúc cơ sở 1</h6>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Thần kinh</h6>
+                            <h6 className={styles.titleItem}>Hệ thống Y tế Thu Cúc cơ sở 2</h6>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Tiêu hóa</h6>
+                            <h6 className={styles.titleItem}>Hệ thống Y tế Thu Cúc cơ sở 3</h6>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Tim mạch</h6>
+                            <h6 className={styles.titleItem}>Hệ thống Y tế Thu Cúc cơ sở 4</h6>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Tai Mũi Họng</h6>
+                            <h6 className={styles.titleItem}>Hệ thống Y tế Thu Cúc cơ sở 5</h6>
                         </div>
                         <div className={styles.itemSilder}>
                             <div className={styles.coverItem}></div>
-                            <h6 className={styles.titleItem}>Cột sống</h6>
+                            <h6 className={styles.titleItem}>Hệ thống Y tế Thu Cúc cơ sở 6</h6>
                         </div>
 
                     </Slider>
@@ -77,4 +77,4 @@ function Specialty() {
     )
 }
 
-export default Specialty
+export default MedicalFacility

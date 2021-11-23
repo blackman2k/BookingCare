@@ -1,0 +1,8 @@
+@import "../../styles/variables";
+.footerContainer {
+  background: $primary-color;
+  color: #fff;
+  .footerWrapper {
+    padding: 20px 0;
+  }
+}

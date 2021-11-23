@@ -5,6 +5,10 @@ import { dispatch } from "../../redux";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import Specialty from "./section/Specialty";
+import MedicalFacility from "./section/MedicalFacility";
+import OutStandingDotor from "./section/OutStandingDoctor";
+import HandBook from "./section/HandBook";
+import Footer from "../../components/Footer/Footer";
 
 function HomePage() {
   console.log(styles)
@@ -12,6 +16,10 @@ function HomePage() {
     <div className={styles.homePage}>
       <Header />
       <Specialty />
+      <MedicalFacility />
+      <OutStandingDotor />
+      <HandBook />
+      <Footer />
     </div>
   )
 }
