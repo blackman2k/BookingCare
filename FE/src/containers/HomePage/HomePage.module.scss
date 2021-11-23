@@ -2,29 +2,112 @@
 .homePage{
     color: $text-color;
 
-    .homePageContent{
-        .bannerHomePage {
+    // .homePageContent {
+        
+    // }
+    
+
+    .headerContainer {
+    width: 100%;
+    .headerWrapper {
+        max-width: 1140px;
+        display: flex;
+        margin: 0 auto;
+        height: $height-header;
+
+        .headerLogo{
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            flex: 1 1;
+            i {
+                font-size: 25px;
+                color: $second-color;
+            }
+            .headerLogoImage{
+                height: 60%;
+                width: 60%; 
+                background-image: url('../../assets/images/BookingCare.png');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center left;
+                margin-left: 10px;
+            }
+        }
+        .headerList{
+            flex: 2.5 1;
+            height: $height-header;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .headerItemList{
+                p {
+                    margin: 0;
+                    color: $text-color;
+                }
+                p:last-child {
+                    font-size: 12px
+                }
+            }
+        }
+        .headerRight{
+            flex: 1 1;
+            display: flex;
+            padding-right: 10px;
+            align-items: center;
+            justify-content: flex-end;
+            i {
+                font-size: 25px;
+                color: $primary-color;
+            }
+            span {
+                font-size: 16px;
+                font-weight: 500;
+                margin-left: 6px;
+                color: $sub-text-color;
+            }
+            .languageOptions{
+                font-size: 16px;
+                font-weight: 500;
+                margin-left: 25px;
+                span{
+                    color: $sub-text-color;
+                    cursor: pointer;
+                    opacity: 0.5;
+                    &.active{
+                        color: #3dc1d3;
+                        opacity: 1;
+                    }
+                    &:hover{
+                        color: #3dc1d3;
+                        opacity: 8;
+                    }
+                }
+            }
+        }
+    }
+    .bannerHomePage {
             height: calc( 100vh - #{$height-header} );
             background: url('../../assets/images/bookingcare-cover-4.jpg') no-repeat center center;
             position: relative;
 
-            &::before {
-                position: absolute;
-                content: "";
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                background: #b1b1b16b;
-                z-index: 100;
-            }
+            // &::before {
+            //     position: absolute;
+            //     content: "";
+            //     top: 0;
+            //     right: 0;
+            //     bottom: 0;
+            //     left: 0;
+            //     background: #b1b1b16b;
+            //     z-index: 2;
+            // }
             .content {
                 height: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                z-index: 101;
+                z-index: 3;
                 position: relative;
                 .title {
                 position: relative;
@@ -100,66 +183,6 @@
             }
             
         }
-    }
-    
-
-    .headerContainer {
-    height: $height-header;
-    width: 100%;
-    .headerWrapper {
-        max-width: 1140px;
-        display: flex;
-        margin: 0 auto;
-        .headerLogo{
-            display: flex;
-            align-items: center;
-            flex: 1 1;
-            i {
-                font-size: 25px;
-                color: $second-color;
-            }
-            .headerLogoImage{
-                height: 70%;
-                width: 70%;
-                background-image: url('../../assets/images/BookingCare.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                margin-left: 15px;
-            }
-        }
-        .headerList{
-            flex: 2.5 1;
-            height: $height-header;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .headerItemList{
-                p {
-                    margin: 0;
-                    color: $text-color;
-                }
-                p:last-child {
-                    font-size: 12px
-                }
-            }
-        }
-        .headerRight{
-            flex: 1 1;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            i {
-                font-size: 25px;
-                color: $primary-color;
-            }
-            span {
-                font-size: 16px;
-                font-weight: 500;
-                margin-left: 6px;
-                color: $sub-text-color;
-            }
-        }
-    }
     }
 }
 

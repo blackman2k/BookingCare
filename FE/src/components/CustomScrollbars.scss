@@ -76,6 +76,8 @@
     border-radius: 10px;
     background-clip: padding-box;
     min-height: 0px;
+    z-index: 1000;
+    position: relative;
   }
 
 }
