@@ -31,7 +31,9 @@ const handleUserLogin = (email, password) => {
                     output.errMessage = 'OK'
                     output.data = {
                         email: userResult.email,
-                        roleId: userResult.roleId
+                        roleId: userResult.roleId,
+                        firstName: userResult.firstName,
+                        lastName: userResult.lastName
                     }
                 } else {
                     output.errCode = 2

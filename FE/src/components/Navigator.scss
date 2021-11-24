@@ -1,4 +1,5 @@
 @import "../styles/common.scss";
+@import "../styles/variables";
 
 .navigator-menu {
     display: flex;
@@ -72,6 +73,9 @@
                 &.active span {
                     font-weight: 500;
                     color: $colormain;
+                }
+                &.active a {
+                    color: $primary-color;
                 }
                 &:hover {
                     background-color: darken($bg-menu-color, 3);

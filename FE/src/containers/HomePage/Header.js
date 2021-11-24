@@ -8,13 +8,11 @@ import { changeLanguage } from '../../store/actions';
 import { dispatch } from '../../redux';
 import { connect } from 'react-redux';
 import { FaTooth, FaHeadSideVirus } from 'react-icons/fa'
-
+import { languages } from '../../utils';
 
 function Header(props) {
-  const [languageSelect, setLanguageSelect] = useState('vi')
 
   const handleChangeLanguage = (language) => {
-    setLanguageSelect(language)
     props.changeLanguage(language)
   }
 
@@ -48,8 +46,8 @@ function Header(props) {
             <i class="fas fa-question-circle"></i>
             <span><FormattedMessage id='header.support' /></span>
             <div className={styles.languageOptions}>
-              <span onClick={() => handleChangeLanguage('vi')} className={clsx({ [styles.active]: languageSelect === 'vi' })}>VI</span>
-              <span onClick={() => handleChangeLanguage('en')} className={clsx({ [styles.active]: languageSelect === 'en' })}>EN</span>
+              <span onClick={() => handleChangeLanguage('vi')} className={clsx({ [styles.active]: props.language === languages.VI })}>VI</span>
+              <span onClick={() => handleChangeLanguage('en')} className={clsx({ [styles.active]: props.language === languages.EN })}>EN</span>
             </div>
           </div>
         </div>

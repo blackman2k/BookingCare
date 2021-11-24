@@ -1,5 +1,6 @@
 @import "variables";
-@import "../../node_modules/bootstrap/scss/bootstrap";
+// @import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 
 $fa-font-path : "~@fortawesome/fontawesome-free-webfonts/webfonts";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
@@ -8,4 +9,4 @@ $fa-font-path : "~@fortawesome/fontawesome-free-webfonts/webfonts";
 @import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
 
 @import "base";
-@import "form";
+// @import "form";
