@@ -37,6 +37,8 @@
         }
     },
     "user-manage": {
+        "title": "Quản lý người dùng",
+        "title-form": "Thêm mới người dùng",
         "email": "Email",
         "password": "Mật khẩu",
         "first-name": "Tên",
@@ -47,6 +49,7 @@
         "position": "Chức danh",
         "role": "Vai trò",
         "file": "Ảnh đại diện",
-        "add": "Thêm người dùng"
+        "add": "Thêm người dùng",
+        "upload": "Tải ảnh"
     }
 }

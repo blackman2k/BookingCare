@@ -37,6 +37,8 @@
         }
     },
     "user-manage": {
+        "title": "Quản lý người dùng",
+        "title-form": "Add user",
         "email": "Email",
         "password": "Password",
         "first-name": "First name",
@@ -47,6 +49,7 @@
         "position": "Position",
         "role": "Role",
         "file": "Avatar",
-        "add": "Add user"
+        "add": "Add user",
+        "upload": "Upload image"
     }
 }

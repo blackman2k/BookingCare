@@ -1,2 +1,20 @@
-.formUser {
+.labelUpload {
+    background: #ddd;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+.uploadAva{
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    .previewAva {
+        $heightPreviewAva: 100px;
+        width: $heightPreviewAva;
+        height: $heightPreviewAva;
+        border: 1px solid #d6d6d6 ;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
 }

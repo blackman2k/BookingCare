@@ -134,9 +134,10 @@ const createNewUser = (data) => {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 address: data.address,
-                phonenumber: data.phonenumber,
-                gender: data.gender === '1' ? true : false,
-                roleId: data.roleId,
+                phonenumber: data.phoneNumber,
+                gender: data.gender,
+                roleId: data.role,
+                positionId: data.position,
             })
 
             resolve({
@@ -210,8 +211,8 @@ const updateUserData = (data) => {
 
 const getAllCodeService = async (typeAllCode) => {
     return new Promise(async (resole, reject) => {
-        try{
-            if(!typeAllCode) {
+        try {
+            if (!typeAllCode) {
                 resole({
                     errCode: 1,
                     errMessage: "Missing required parameters !"
@@ -219,13 +220,13 @@ const getAllCodeService = async (typeAllCode) => {
             } else {
                 let res = {}
                 let data = await db.Allcode.findAll({
-                    where: {type: typeAllCode}
+                    where: { type: typeAllCode }
                 })
                 res.errCode = 0
                 res.data = data
                 resole(res)
             }
-        } catch(e) {
+        } catch (e) {
             reject(e)
         }
     })
