@@ -1,82 +1,82 @@
-import { useState, useEffect } from "react";
-import { FormattedMessage } from "react-intl";
-import { connect } from "react-redux";
-import "./UserManage.scss";
-import userService from "../../services/userService";
-import ModalUser from "./ModalUser";
-import { emitter } from "../../utils/emitter";
-import ModalEditUser from "./ModalEditUser";
+import { useState, useEffect } from "react"
+import { FormattedMessage } from "react-intl"
+import { connect } from "react-redux"
+import "./UserManage.scss"
+import userService from "../../services/userService"
+import ModalUser from "./ModalUser"
+import { emitter } from "../../utils/emitter"
+import ModalEditUser from "./ModalEditUser"
 
 function UserManage() {
-  const [isOpenModalUser, setIsOpenModalUser] = useState(false);
-  const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false);
-  const [arrUsers, setArrUsers] = useState([]);
-  const [userEdit, setUserEdit] = useState({});
-  const [method, SetMethod] = useState("add");
+  const [isOpenModalUser, setIsOpenModalUser] = useState(false)
+  const [isOpenModalEditUser, setIsOpenModalEditUser] = useState(false)
+  const [arrUsers, setArrUsers] = useState([])
+  const [userEdit, setUserEdit] = useState({})
+  const [method, SetMethod] = useState("add")
 
   useEffect(async () => {
-    await getAllUsers();
-  }, []);
+    await getAllUsers()
+  }, [])
 
   const toggleUserModal = () => {
-    setIsOpenModalUser(!isOpenModalUser);
-  };
+    setIsOpenModalUser(!isOpenModalUser)
+  }
   const toggleEditModal = () => {
-    setIsOpenModalEditUser(!isOpenModalEditUser);
-  };
+    setIsOpenModalEditUser(!isOpenModalEditUser)
+  }
 
   const handleAddNewUser = () => {
-    setIsOpenModalUser(true);
-    setUserEdit({});
-  };
+    setIsOpenModalUser(true)
+    setUserEdit({})
+  }
 
   const createNewUser = async (data) => {
     try {
-      let response = await userService.createNewUserService(data);
+      let response = await userService.createNewUserService(data)
       if (response && response.errCode === 0) {
-        await getAllUsers();
-        setIsOpenModalUser(false);
-        emitter.emit("EVENT_CLEAR_MODAL_DATA");
+        await getAllUsers()
+        setIsOpenModalUser(false)
+        emitter.emit("EVENT_CLEAR_MODAL_DATA")
       }
     } catch (e) {}
-  };
+  }
 
   const getAllUsers = async () => {
-    let response = await userService.getAllUsers("ALL");
+    let response = await userService.getAllUsers("ALL")
     if (response && response.errCode === 0) {
-      setArrUsers(response.data);
+      setArrUsers(response.data)
     }
-  };
+  }
 
   const handleDeleteUser = async (item) => {
     try {
-      let res = await userService.deleteUserService(item.id);
+      let res = await userService.deleteUserService(item.id)
       if (res && res.errCode === 0) {
-        await getAllUsers();
+        await getAllUsers()
       } else {
-        console.log(res.errMessage);
+        console.log(res.errMessage)
       }
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
-  };
+  }
 
   const handleEditUser = async (user) => {
-    setIsOpenModalUser(true);
-    setUserEdit(user);
-  };
+    setIsOpenModalUser(true)
+    setUserEdit(user)
+  }
 
   const editUser = (user) => {
     userService.editUserService(user).then(async (result) => {
       if (result && result.errCode === 0) {
-        await getAllUsers();
-        setIsOpenModalUser(false);
+        await getAllUsers()
+        setIsOpenModalUser(false)
         // emitter.emit("EVENT_CLEAR_MODAL_DATA");
       } else {
-        console.log("Update that bai");
+        console.log("Update that bai")
       }
-    });
-  };
+    })
+  }
   return (
     <div className="user-container">
       <ModalUser
@@ -93,7 +93,7 @@ function UserManage() {
           className="btn btn-primary px-3"
           onClick={() => handleAddNewUser()}
         >
-          <i class="fas fa-plus mr-1"></i>
+          <i className="fas fa-plus mr-1"></i>
           Add new users
         </button>
       </div>
@@ -119,13 +119,13 @@ function UserManage() {
                     className="btn-edit mx-1"
                     onClick={() => handleEditUser(item)}
                   >
-                    <i class="fas fa-pencil-alt"></i>
+                    <i className="fas fa-pencil-alt"></i>
                   </button>
                   <button
                     className="btn-delete mx-1"
                     onClick={() => handleDeleteUser(item)}
                   >
-                    <i class="fas fa-trash"></i>
+                    <i className="fas fa-trash"></i>
                   </button>
                 </td>
               </tr>
@@ -133,15 +133,15 @@ function UserManage() {
         </table>
       </div>
     </div>
-  );
+  )
 }
 
 const mapStateToProps = (state) => {
-  return {};
-};
+  return {}
+}
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
-};
+  return {}
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserManage)

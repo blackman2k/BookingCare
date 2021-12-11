@@ -1,63 +1,64 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { push } from "connected-react-router"
 
-import * as actions from "../../store/actions";
-import "./Login.scss";
-import { times } from "lodash";
+import * as actions from "../../store/actions"
+import "./Login.scss"
+import { times } from "lodash"
 
-import { userService } from "../../services";
-import { userLoginSuccess } from "../../store/actions";
+import { userService } from "../../services"
+import { userLoginSuccess } from "../../store/actions"
 
 class Login extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       username: "",
       password: "",
       isShowPassword: false,
-      errMessage: ''
-    };
+      errMessage: "",
+    }
   }
 
   handleOnChangeUsername = (event) => {
     this.setState({
       username: event.target.value,
-    });
-  };
+    })
+  }
   handleOnChangePassword = (event) => {
     this.setState({
       password: event.target.value,
-    });
-  };
+    })
+  }
 
   handleLogin = async (event) => {
     this.setState({
-      errMessage: ''
+      errMessage: "",
     })
     try {
-      const result = await userService.handleLogin(this.state.username, this.state.password)
+      const result = await userService.handleLogin(
+        this.state.username,
+        this.state.password
+      )
       if (result && result.errCode !== 0) {
         this.setState({
-          errMessage: result.message
+          errMessage: result.message,
         })
       }
       if (result && result.errCode === 0) {
         this.props.userLoginSuccess(result.data)
         console.log("Login succesd")
       }
-
     } catch (e) {
       this.setState({
-        errMessage: e.response.data.message
+        errMessage: e.response.data.message,
       })
     }
-
-  };
+  }
 
   handleClickShowPassword = () => {
     this.setState((prev) => ({
-      isShowPassword: !prev.isShowPassword
+      isShowPassword: !prev.isShowPassword,
     }))
   }
 
@@ -72,7 +73,7 @@ class Login extends Component {
             </p>
             <div className="form-group">
               <div className="icon-container">
-                <i class="fas fa-user"></i>
+                <i className="fas fa-user"></i>
               </div>
               <input
                 type="text"
@@ -80,13 +81,18 @@ class Login extends Component {
                 placeholder="Enter your email"
                 value={this.state.username}
                 onChange={(event) => {
-                  this.handleOnChangeUsername(event);
+                  this.handleOnChangeUsername(event)
                 }}
               />
             </div>
             <div className="form-group">
               <div className="icon-container">
-                <i class={this.state.isShowPassword ? "fas fa-lock-open" : "fas fa-lock"}
+                <i
+                  className={
+                    this.state.isShowPassword
+                      ? "fas fa-lock-open"
+                      : "fas fa-lock"
+                  }
                   onClick={(event) => {
                     this.handleClickShowPassword()
                   }}
@@ -98,18 +104,17 @@ class Login extends Component {
                 placeholder="Enter your password"
                 value={this.state.password}
                 onChange={(event) => {
-                  this.handleOnChangePassword(event);
+                  this.handleOnChangePassword(event)
                 }}
               />
             </div>
-            {
-              this.state.errMessage &&
+            {this.state.errMessage && (
               <span className="error-message">{this.state.errMessage}</span>
-            }
+            )}
             <button
               type="button"
               onClick={(event) => {
-                this.handleLogin(event);
+                this.handleLogin(event)
               }}
             >
               Sign In
@@ -125,30 +130,31 @@ class Login extends Component {
                         <p>Or sign up with</p>
                         <div class="social-login-wrap">
                             <a>
-                                <i class="fab fa-facebook"></i>
+                                <i className="fab fa-facebook"></i>
                             </a>
                             <a>
-                                <i class="fab fa-google-plus"></i>
+                                <i className="fab fa-google-plus"></i>
                             </a>
                         </div>
                     </div> */}
         </div>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     language: state.app.language,
-  };
-};
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo))
-  };
-};
+    userLoginSuccess: (userInfo) =>
+      dispatch(actions.userLoginSuccess(userInfo)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

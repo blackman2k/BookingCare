@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from "react";
-import { FormattedMessage } from "react-intl";
-import { connect } from "react-redux";
-import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
-import { Button } from "reactstrap";
-import { emitter } from "../../utils/emitter";
+import { useEffect, useState, useRef } from "react"
+import { FormattedMessage } from "react-intl"
+import { connect } from "react-redux"
+import { Modal } from "react-bootstrap"
+import { Button } from "react-bootstrap"
+import { emitter } from "../../utils/emitter"
 
 const initFormData = {
   email: "",
@@ -11,69 +11,69 @@ const initFormData = {
   firstName: "",
   lastName: "",
   address: "",
-};
+}
 
 function ModalUser({ isOpen, createNewUser, toggle, userEdit, editUser }) {
-  const [formData, setFormData] = useState(initFormData);
+  const [formData, setFormData] = useState(initFormData)
 
-  console.log(formData, userEdit);
+  console.log(formData, userEdit)
   useEffect(() => {
-    listenToEmitter();
-    switchInputState();
-  }, []);
+    listenToEmitter()
+    switchInputState()
+  }, [])
 
   useEffect(() => {
     if (userEdit) {
-      setFormData(userEdit);
+      setFormData(userEdit)
     }
-  }, [userEdit]);
+  }, [userEdit])
 
-  const emailElement = useRef();
+  const emailElement = useRef()
 
   const listenToEmitter = () => {
     emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
-      setFormData = initFormData;
-    });
-  };
+      setFormData = initFormData
+    })
+  }
 
   const handleToggleModal = () => {
-    toggle();
-  };
+    toggle()
+  }
 
   const handleSubmitFrom = () => {
     if (!userEdit) {
-      let isValid = checkValidateInput();
+      let isValid = checkValidateInput()
       if (isValid === true) {
-        console.log(formData);
+        console.log(formData)
       } else {
-        alert("Missing parameters");
+        alert("Missing parameters")
       }
     } else {
-      editUser(formData);
+      editUser(formData)
     }
-  };
+  }
 
   const checkValidateInput = () => {
-    let isValidate = true;
-    let arrInput = ["email", "password", "firstName", "lastName", "address"];
+    let isValidate = true
+    let arrInput = ["email", "password", "firstName", "lastName", "address"]
     for (let i = 0; i < arrInput.length; i++) {
-      console.log(formData[arrInput[i]]);
-      if (formData[arrInput[i]] === "") isValidate = false;
+      console.log(formData[arrInput[i]])
+      if (formData[arrInput[i]] === "") isValidate = false
     }
-    return isValidate;
-  };
+    return isValidate
+  }
 
   const handleChangeInput = (event, field) => {
     setFormData({
       ...formData,
       [field]: event.target.value,
-    });
-  };
+    })
+  }
 
   const switchInputState = () => {
-    emailElement?.current?.focus();
-    setFormData(initFormData);
-  };
+    emailElement?.current?.focus()
+    setFormData(initFormData)
+  }
 
   return (
     <Modal
@@ -82,8 +82,8 @@ function ModalUser({ isOpen, createNewUser, toggle, userEdit, editUser }) {
       size="xl"
       className="modal-user-container"
     >
-      <ModalHeader toggle={handleToggleModal}>Create a new user</ModalHeader>
-      <ModalBody>
+      <Modal.Header toggle={handleToggleModal}>Create a new user</Modal.Header>
+      <Modal.Body>
         <div className="modal-user-body">
           <div className="input-container">
             <label>Email</label>
@@ -129,8 +129,8 @@ function ModalUser({ isOpen, createNewUser, toggle, userEdit, editUser }) {
             />
           </div>
         </div>
-      </ModalBody>
-      <ModalFooter>
+      </Modal.Body>
+      <Modal.Footer>
         <Button
           color="primary"
           className="px-3"
@@ -141,17 +141,17 @@ function ModalUser({ isOpen, createNewUser, toggle, userEdit, editUser }) {
         <Button className="px-3" onClick={handleToggleModal}>
           Close
         </Button>
-      </ModalFooter>
+      </Modal.Footer>
     </Modal>
-  );
+  )
 }
 
 const mapStateToProps = (state) => {
-  return {};
-};
+  return {}
+}
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
-};
+  return {}
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalUser);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalUser)
