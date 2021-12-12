@@ -4,22 +4,13 @@ import { Button, Container } from "react-bootstrap"
 import * as actions from "../../../store/actions/adminAction"
 import { connect } from "react-redux"
 import Select from "react-select"
+import { languages } from "../../../utils"
 
 import MarkdownIt from "markdown-it"
 import MdEditor from "react-markdown-editor-lite"
 import "react-markdown-editor-lite/lib/index.css"
 import clsx from "clsx"
 const mdParser = new MarkdownIt(/* Markdown-it options */)
-
-function handleEditorChange({ html, text }) {
-  console.log("handleEditorChange", html, text)
-}
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-]
 
 class ManageDoctor extends Component {
   constructor(props) {
@@ -29,7 +20,32 @@ class ManageDoctor extends Component {
       contentHTML: "",
       contentMarkdown: "",
       description: "",
+      listDoctorsSelect: [],
     }
+  }
+
+  componentDidMount() {
+    this.props.getAllDoctors()
+  }
+
+  componentDidUpdate = (preProps) => {
+    if (
+      preProps.listDoctors !== this.props.listDoctors ||
+      preProps.language !== this.props.language
+    ) {
+      this.setState({
+        listDoctorsSelect: this.handleConvertDataToSelect(
+          this.props.listDoctors
+        ),
+      })
+    }
+  }
+
+  handleEditorChange = ({ html, text }) => {
+    this.setState({
+      contentHTML: html,
+      contentMarkdown: text,
+    })
   }
 
   handleChange = (selectedOption) => {
@@ -44,6 +60,33 @@ class ManageDoctor extends Component {
       description: value,
     })
   }
+  handleConvertDataToSelect = (data) => {
+    return data.map((item) => {
+      let label = ""
+      if (this.props.language === languages.VI) {
+        label = `${item.lastName} ${item.firstName}`
+      } else {
+        label = `${item.firstName} ${item.lastName} `
+      }
+      return {
+        value: item.id,
+        label: label,
+      }
+    })
+  }
+
+  handleSaveInfor = (e) => {
+    e.preventDefault()
+
+    let dataSent = {
+      doctorId: this.state.selectedDoctor?.value,
+      contentHTML: this.state.contentHTML,
+      contentMarkdown: this.state.contentMarkdown,
+      description: this.state.description,
+    }
+
+    this.props.saveInforDoctor(dataSent)
+  }
 
   render() {
     return (
@@ -56,7 +99,7 @@ class ManageDoctor extends Component {
               <Select
                 value={this.state.selectedDoctor}
                 onChange={this.handleChange}
-                options={options}
+                options={this.state.listDoctorsSelect}
                 className={clsx(styles.selectDoctor)}
               />
             </div>
@@ -78,10 +121,14 @@ class ManageDoctor extends Component {
           <MdEditor
             style={{ height: "500px" }}
             renderHTML={(text) => mdParser.render(text)}
-            onChange={handleEditorChange}
+            onChange={this.handleEditorChange}
           />
         </main>
-        <Button variant="primary" className="mt-3">
+        <Button
+          variant="primary"
+          className="mt-3"
+          onClick={this.handleSaveInfor}
+        >
           Lưu thông tin
         </Button>
       </Container>
@@ -90,13 +137,16 @@ class ManageDoctor extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {}
+  return {
+    listDoctors: state.admin.listDoctors,
+    language: state.app.language,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUserRedux: () => dispatch(actions.fetchAllUserStart()),
-    deleteUser: (userId) => dispatch(actions.deleteUserStart(userId)),
+    getAllDoctors: () => dispatch(actions.getAllDoctors()),
+    saveInforDoctor: (data) => dispatch(actions.saveInforDoctor(data)),
   }
 }
 

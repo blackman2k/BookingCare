@@ -112,8 +112,27 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
       }
-    case actionTypes.FETCH_ALL_USER_FAILED:
+    case actionTypes.FETCH_TOP_DOCTORSS_FAILED:
       state.topDoctors = []
+      return {
+        ...state,
+      }
+    case actionTypes.GET_ALL_DOCTORS_SUCCESS:
+      state.listDoctors = action.listDoctors
+      return {
+        ...state,
+      }
+    case actionTypes.GET_ALL_DOCTORS_FAILED:
+      state.listDoctors = []
+      return {
+        ...state,
+      }
+    case actionTypes.SAVE_INFO_DOCTOR_SUCCESS:
+      return {
+        ...state,
+      }
+    case actionTypes.SAVE_INFO_DOCTOR_FAILED:
+      state.listDoctors = []
       return {
         ...state,
       }
