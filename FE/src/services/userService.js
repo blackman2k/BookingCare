@@ -45,6 +45,10 @@ const saveInfoDoctor = (data) => {
   return axios.post(`api/save-infor-doctor`, data)
 }
 
+const getDetailInforDoctor = (id) => {
+  return axios.get(`/api/get-detail-doctor-by-id?id=${id}`)
+}
+
 const userService = {
   handleLogin,
   getAllUsers,
@@ -55,6 +59,7 @@ const userService = {
   getTopDoctorHomeService,
   getAllDoctors,
   saveInfoDoctor,
+  getDetailInforDoctor,
 }
 
 export default userService

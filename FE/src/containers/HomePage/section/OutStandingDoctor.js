@@ -5,9 +5,11 @@ import { Container } from "react-bootstrap"
 import { languages } from "../../../utils"
 import { Component } from "react"
 import { dispatch } from "../../../redux"
+import { withRouter } from "react-router"
 
 import * as actions from "../../../store/actions"
 import { connect } from "react-redux"
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider"
 
 function SampleNextArrow(props) {
   const { onClick } = props
@@ -63,6 +65,11 @@ class OutStandingDotor extends Component {
     this.props.loadTopDoctors()
   }
 
+  handleViewDetailDoctor = (doctor) => {
+    if (this.props.history)
+      this.props.history.push(`detail-doctor/${doctor.id}`)
+  }
+
   render() {
     let arrDoctors = this.state.arrDoctors
     let { language } = this.props
@@ -93,7 +100,11 @@ class OutStandingDotor extends Component {
                   let nameVi = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName}`
                   let nameEn = `${item.positionData.valueEn},  ${item.firstName} ${item.lastName}`
                   return (
-                    <div className={styles.itemSilder}>
+                    <div
+                      className={styles.itemSilder}
+                      onClick={() => this.handleViewDetailDoctor(item)}
+                      key={item?.id}
+                    >
                       <div
                         className={styles.coverItem}
                         style={{ backgroundImage: `url(${imageBase64})` }}
@@ -127,4 +138,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDotor)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(OutStandingDotor)
+)

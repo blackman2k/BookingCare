@@ -1,0 +1,24 @@
+.detailDoctor {
+  .header {
+    display: flex;
+    .avatar {
+      $heightAva: 130px;
+      height: $heightAva;
+      width: $heightAva;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+    .contentHeader {
+      flex: 1;
+      padding: 20px;
+      .titleContent {
+        font-size: 19px;
+        font-weight: 500;
+      }
+    }
+  }
+  .main {
+  }
+}

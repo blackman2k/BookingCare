@@ -1,139 +1,137 @@
 @import "src/styles/_variables.scss";
 
 .sectionsHomePage {
-    padding: 50px 0;
-    &:nth-of-type(even) {
-        background: #F6F6F6;
-    }
-    &:nth-of-type(odd) {
-        background: #fff;
-    }
+  padding: 50px 0;
+  &:nth-of-type(even) {
+    background: #f6f6f6;
+  }
+  &:nth-of-type(odd) {
+    background: #fff;
+  }
 
-    .headerSection{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 30px;
+  .headerSection {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
 
-        .btnMoreInfo{
-            border: 0;
-            border-radius: 3px;
+    .btnMoreInfo {
+      border: 0;
+      border-radius: 3px;
 
-            &:hover {
-                background: $primary-color;
-                color: #fff;
-            }
-        }
-    }
-
-    .bodySection{
-        .itemSilder {
-            padding: 0 5px;
-            .coverItem {
-                padding-top: 55%;
-                background-image: url("../../../assets/images/Sections/120331-co-xuong-khop.jpg");
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center; 
-                border-radius: 5px;
-            }
-            .titleItem {
-                margin-top: 8px;
-                font-weight: 300;
-                font-size: 1rem;
-            }
-
-            &:hover {
-                cursor: pointer;
-                color: $primary-color;
-            }
-        }
-    }
-    &.medicalFacility{
-        .bodySection{
-            .itemSilder {
-                .coverItem {
-                    background-image: url("../../../assets/images/Sections/MedicalFacility/093035-benh-vien-thu-cuc-1.jpg");
-                }
-            }
-        }
-    }
-    &.outStandingDoctor{
-        .bodySection{
-            .itemSilder {
-                .coverItem {
-                    $height-ava: 120px;
-                    width: 120px;
-                    padding-top: $height-ava;
-                    margin: 0 auto;
-                    border-radius: 50%;
-                    margin-bottom: 20px;
-                    background-image: url("../../../assets/images/Sections/Doctor/155650-gs-ha-van-quyet.jpg");
-                }
-                .nameDoctor {
-                    font-weight: 400;
-                    text-align: center;
-                    line-height: 1.5;
-                }
-                .positionDoctor {
-                    display: block;
-                    text-align: center;
-                    font-size: 13px;
-                }
-                &:hover{
-                    .nameDoctor{
-                        color: $primary-color;
-                    }
-                    cursor: pointer;
-                    color: currentColor;
-                }
-            }
-        }
-    }
-    &.handBook{
-        .bodySection{
-            .itemSilder {
-                display: flex;
-                .coverItem {
-                    width: 50%;
-                    padding-top: 30%;
-                    float: left;
-                    margin-right: 10px;
-                    background-image: url("../../../assets/images/Sections/handbook/172631-kham-nha-khoa-o-dau-tot-tphcm.jpg");
-                }
-                .titleHandbook{
-                    font-weight: 500;
-                }
-            }
-        }
-    }
-}
-
-
-.btnSlider {
-    $height-arrow: 40px;
-    border: 0;
-    width: $height-arrow;
-    height: $height-arrow;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 50;
-
-
-    &:hover {
+      &:hover {
         background: $primary-color;
         color: #fff;
+      }
     }
-    &:active {
-        transform: translateY(-50%) scale(0.95);
+  }
 
+  .bodySection {
+    .itemSilder {
+      padding: 0 5px;
+      cursor: pointer;
+      .coverItem {
+        padding-top: 55%;
+        background-image: url("../../../assets/images/Sections/120331-co-xuong-khop.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 5px;
+      }
+      .titleItem {
+        margin-top: 8px;
+        font-weight: 300;
+        font-size: 1rem;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: $primary-color;
+      }
     }
+  }
+  &.medicalFacility {
+    .bodySection {
+      .itemSilder {
+        .coverItem {
+          background-image: url("../../../assets/images/Sections/MedicalFacility/093035-benh-vien-thu-cuc-1.jpg");
+        }
+      }
+    }
+  }
+  &.outStandingDoctor {
+    .bodySection {
+      .itemSilder {
+        .coverItem {
+          $height-ava: 120px;
+          width: 120px;
+          padding-top: $height-ava;
+          margin: 0 auto;
+          border-radius: 50%;
+          margin-bottom: 20px;
+          background-image: url("../../../assets/images/Sections/Doctor/155650-gs-ha-van-quyet.jpg");
+        }
+        .nameDoctor {
+          font-weight: 400;
+          text-align: center;
+          line-height: 1.5;
+        }
+        .positionDoctor {
+          display: block;
+          text-align: center;
+          font-size: 13px;
+        }
+        &:hover {
+          .nameDoctor {
+            color: $primary-color;
+          }
+          cursor: pointer;
+          color: currentColor;
+        }
+      }
+    }
+  }
+  &.handBook {
+    .bodySection {
+      .itemSilder {
+        display: flex;
+        .coverItem {
+          width: 50%;
+          padding-top: 30%;
+          float: left;
+          margin-right: 10px;
+          background-image: url("../../../assets/images/Sections/handbook/172631-kham-nha-khoa-o-dau-tot-tphcm.jpg");
+        }
+        .titleHandbook {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+.btnSlider {
+  $height-arrow: 40px;
+  border: 0;
+  width: $height-arrow;
+  height: $height-arrow;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+
+  &:hover {
+    background: $primary-color;
+    color: #fff;
+  }
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
 }
 
 .nextArrow {
-    right: -20px;
+  right: -20px;
 }
 .prevArrow {
-    left: -20px;
+  left: -20px;
 }
