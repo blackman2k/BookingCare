@@ -52,7 +52,7 @@ function UserRedux(props) {
       ...formData,
       gender:
         props.listGenders && props.listGenders.length > 0
-          ? props.listGenders[0].key
+          ? props.listGenders[0].keyMap
           : "",
     })
   }, [props.listGenders])
@@ -63,7 +63,7 @@ function UserRedux(props) {
       ...formData,
       position:
         props.listPositions && props.listPositions.length > 0
-          ? props.listPositions[0].key
+          ? props.listPositions[0].keyMap
           : "",
     })
   }, [props.listPositions])
@@ -74,7 +74,7 @@ function UserRedux(props) {
       ...formData,
       role:
         props.listRoles && props.listRoles.length > 0
-          ? props.listRoles[0].key
+          ? props.listRoles[0].keyMap
           : "",
     })
   }, [props.listRoles])
@@ -102,6 +102,7 @@ function UserRedux(props) {
     let result = validateFormData()
     if (result) {
       if (isEdit) {
+        console.log("Formdata: ", formData)
         props.saveUser(formData)
       } else {
         props.createNewUser(formData)
@@ -152,12 +153,26 @@ function UserRedux(props) {
       position: user.positionId,
       phoneNumber: user.phonenumber,
       password: "hhhhhhhh",
-      ava: "",
+      avatar: user.avatar,
     }
   }
 
   const setToOriginalState = () => {
-    setFormData(initialFormData)
+    setFormData({
+      ...initialFormData,
+      gender:
+        props.listGenders && props.listGenders.length > 0
+          ? props.listGenders[0].keyMap
+          : "",
+      position:
+        props.listPositions && props.listPositions.length > 0
+          ? props.listPositions[0].keyMap
+          : "",
+      role:
+        props.listRoles && props.listRoles.length > 0
+          ? props.listRoles[0].keyMap
+          : "",
+    })
     setPreviewAavUrl("")
     setIsEdit(false)
     setFile("")
@@ -281,7 +296,7 @@ function UserRedux(props) {
                   listGenders.length > 0 &&
                   listGenders.map((item, index) => {
                     return (
-                      <option key={index} value={item.key}>
+                      <option key={index} value={item.keyMap}>
                         {languages === "vi" ? item.valueVi : item.valueEn}
                       </option>
                     )
@@ -304,7 +319,7 @@ function UserRedux(props) {
                   listPositions.length > 0 &&
                   listPositions.map((item, index) => {
                     return (
-                      <option key={index} value={item.key}>
+                      <option key={index} value={item.keyMap}>
                         {languages === "vi" ? item.valueVi : item.valueEn}
                       </option>
                     )
@@ -327,7 +342,7 @@ function UserRedux(props) {
                   listRoles.length > 0 &&
                   listRoles.map((item, index) => {
                     return (
-                      <option key={index} value={item.key}>
+                      <option key={index} value={item.keyMap}>
                         {languages === "vi" ? item.valueVi : item.valueEn}
                       </option>
                     )

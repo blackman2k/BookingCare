@@ -178,3 +178,21 @@ export const saveUserStartSuccess = (user) => ({
 export const saveUserStartFailed = () => ({
   type: actionTypes.SAVE_USER_FAILED,
 })
+
+export const fetchTopDoctor = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await userService.getTopDoctorHomeService("")
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_TOP_DOCTORSS_SUCCESS,
+          dataDoctors: res.data,
+        })
+      }
+    } catch (e) {
+      dispatch({
+        type: actionTypes.FETCH_TOP_DOCTORSS_FAILED,
+      })
+    }
+  }
+}
