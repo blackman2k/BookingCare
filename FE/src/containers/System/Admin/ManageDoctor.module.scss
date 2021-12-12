@@ -1,0 +1,17 @@
+.headerContent {
+  display: flex;
+  gap: 20px;
+  .contentLeft {
+    flex: 3;
+  }
+  .contentRight {
+    flex: 7;
+    textarea {
+      width: 100%;
+    }
+  }
+}
+.titleSection {
+  font-weight: 400;
+  font-size: 17px;
+}
