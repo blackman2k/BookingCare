@@ -197,7 +197,7 @@ export const fetchTopDoctor = () => {
   }
 }
 
-export const getAllDoctors = () => {
+export const fetchAllDoctors = () => {
   return async (dispatch) => {
     try {
       let res = await userService.getAllDoctors()
@@ -205,14 +205,14 @@ export const getAllDoctors = () => {
 
       if (res && res.errCode === 0) {
         dispatch({
-          type: actionTypes.GET_ALL_DOCTORS_SUCCESS,
-          listDoctors: res.doctors,
+          type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
+          allDoctors: res.doctors,
         })
       } else {
-        dispatch({ type: actionTypes.GET_ALL_DOCTORS_FAILED })
+        dispatch({ type: actionTypes.FETCH_ALL_DOCTORS_FAILED })
       }
     } catch (e) {
-      dispatch({ type: actionTypes.GET_ALL_DOCTORS_FAILED })
+      dispatch({ type: actionTypes.FETCH_ALL_DOCTORS_FAILED })
     }
   }
 }
@@ -236,6 +236,27 @@ export const saveInforDoctor = (data) => {
       toast.error("Lưu thông tin thất bại!")
 
       dispatch({ type: actionTypes.SAVE_INFO_DOCTOR_FAILED })
+    }
+  }
+}
+export const fetchAllScheduleTime = () => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await userService.getAllCodeService("TIME")
+      if (res && res.errCode === 0) {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_SUCCESS,
+          dataTime: res.data,
+        })
+      } else {
+        dispatch({
+          type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED,
+        })
+      }
+    } catch (error) {
+      dispatch({
+        type: actionTypes.FETCH_ALLCODE_SCHEDULE_TIME_FAILED,
+      })
     }
   }
 }

@@ -26,17 +26,17 @@ class ManageDoctor extends Component {
   }
 
   componentDidMount() {
-    this.props.getAllDoctors()
+    this.props.fetchAllDoctors()
   }
 
   componentDidUpdate = (preProps) => {
     if (
-      preProps.listDoctors !== this.props.listDoctors ||
+      preProps.allDoctors !== this.props.allDoctors ||
       preProps.language !== this.props.language
     ) {
       this.setState({
         listDoctorsSelect: this.handleConvertDataToSelect(
-          this.props.listDoctors
+          this.props.allDoctors
         ),
       })
     }
@@ -110,7 +110,7 @@ class ManageDoctor extends Component {
   }
 
   render() {
-    console.log("List doctors: ", this.props.listDoctors)
+    console.log("List doctors: ", this.props.allDoctors)
     return (
       <Container>
         <header className="mb-3">
@@ -161,14 +161,14 @@ class ManageDoctor extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    listDoctors: state.admin.listDoctors,
+    allDoctors: state.admin.allDoctors,
     language: state.app.language,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllDoctors: () => dispatch(actions.getAllDoctors()),
+    fetchAllDoctors: () => dispatch(actions.fetchAllDoctors()),
     saveInforDoctor: (data) => dispatch(actions.saveInforDoctor(data)),
   }
 }
