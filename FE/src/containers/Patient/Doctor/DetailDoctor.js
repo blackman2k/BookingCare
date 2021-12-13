@@ -7,7 +7,7 @@ import Select from "react-select"
 import { languages } from "../../../utils"
 import clsx from "clsx"
 import { userService } from "../../../services"
-import HeaderDetail from "../../../components/Header/HeaderDetail"
+import Header from "../../HomePage/Header"
 
 class DetailDoctor extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class DetailDoctor extends Component {
     }
     return (
       <div className={styles.detailDoctor}>
-        <HeaderDetail />
+        <Header isShowBanner={false} />
         <Container className="py-3">
           <header className={styles.header}>
             <div

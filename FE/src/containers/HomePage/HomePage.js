@@ -1,20 +1,20 @@
-import clsx from "clsx";
-import Header from "./Header";
+import clsx from "clsx"
+import Header from "./Header"
 import styles from "./HomePage.module.scss"
-import { dispatch } from "../../redux";
-import { connect } from "react-redux";
-import { FormattedMessage } from "react-intl";
-import Specialty from "./section/Specialty";
-import MedicalFacility from "./section/MedicalFacility";
-import OutStandingDotor from "./section/OutStandingDoctor";
-import HandBook from "./section/HandBook";
-import Footer from "../../components/Footer/Footer";
+import { dispatch } from "../../redux"
+import { connect } from "react-redux"
+import { FormattedMessage } from "react-intl"
+import Specialty from "./section/Specialty"
+import MedicalFacility from "./section/MedicalFacility"
+import OutStandingDotor from "./section/OutStandingDoctor"
+import HandBook from "./section/HandBook"
+import Footer from "../../components/Footer/Footer"
 
 function HomePage() {
   console.log(styles)
   return (
     <div className={styles.homePage}>
-      <Header />
+      <Header isShowBanner={true} />
       <Specialty />
       <MedicalFacility />
       <OutStandingDotor />
@@ -24,17 +24,15 @@ function HomePage() {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
-    language: state.app.language
+    language: state.app.language,
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-
-  }
+const mapDispatchToProps = (dispatch) => {
+  return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

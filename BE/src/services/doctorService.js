@@ -67,12 +67,28 @@ const saveDetailInforDoctor = (data) => {
           errMessage: "Missing parameters",
         })
       } else {
-        await db.Markdown.create({
-          contentHTML: data.contentHTML,
-          contentMarkdown: data.contentMarkdown,
-          description: data.description,
-          doctorId: data.doctorId,
+        let markdownUser = await db.Markdown.findOne({
+          where: {
+            doctorId: data.doctorId,
+          },
+          raw: false,
         })
+        if (markdownUser) {
+          console.log("Da co du lieu", markdownUser)
+          markdownUser.contentHTML = data.contentHTML
+          markdownUser.contentMarkdown = data.contentMarkdown
+          markdownUser.description = data.description
+          markdownUser.doctorId = data.doctorId
+          await markdownUser.save()
+        } else {
+          await db.Markdown.create({
+            contentHTML: data.contentHTML,
+            contentMarkdown: data.contentMarkdown,
+            description: data.description,
+            doctorId: data.doctorId,
+          })
+        }
+
         resolve({
           errCode: 0,
           errMessage: "Save information success",

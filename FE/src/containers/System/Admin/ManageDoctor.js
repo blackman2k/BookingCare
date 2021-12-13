@@ -10,6 +10,7 @@ import MarkdownIt from "markdown-it"
 import MdEditor from "react-markdown-editor-lite"
 import "react-markdown-editor-lite/lib/index.css"
 import clsx from "clsx"
+import { userService } from "../../../services"
 const mdParser = new MarkdownIt(/* Markdown-it options */)
 
 class ManageDoctor extends Component {
@@ -48,7 +49,27 @@ class ManageDoctor extends Component {
     })
   }
 
-  handleChange = (selectedOption) => {
+  handleChange = async (selectedOption) => {
+    let user = await userService.getDetailInforDoctor(selectedOption.value)
+    console.log(user)
+    if (user && user.data.Markdown) {
+      this.setState(
+        {
+          contentHTML: user.data.Markdown.contentHTML,
+          contentMarkdown: user.data.Markdown.contentMarkdown,
+          description: user.data.Markdown.description,
+        },
+        () => {
+          console.log(this.state)
+        }
+      )
+    } else {
+      this.setState({
+        contentHTML: "",
+        contentMarkdown: "",
+        description: "",
+      })
+    }
     this.setState({ selectedDoctor: selectedOption })
   }
 
@@ -89,10 +110,11 @@ class ManageDoctor extends Component {
   }
 
   render() {
+    console.log("List doctors: ", this.props.listDoctors)
     return (
       <Container>
         <header className="mb-3">
-          <h2 className="text-center">Quản lí thông tin bác sĩ</h2>
+          <h2 className="text-center mt-3">Quản lí thông tin bác sĩ</h2>
           <div className={styles.headerContent}>
             <div className={styles.contentLeft}>
               <p className={styles.titleSection}>Chọn bác sĩ</p>
@@ -122,6 +144,7 @@ class ManageDoctor extends Component {
             style={{ height: "500px" }}
             renderHTML={(text) => mdParser.render(text)}
             onChange={this.handleEditorChange}
+            value={this.state.contentMarkdown}
           />
         </main>
         <Button

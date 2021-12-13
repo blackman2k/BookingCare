@@ -204,19 +204,14 @@ export const getAllDoctors = () => {
       console.log("Res: ", res)
 
       if (res && res.errCode === 0) {
-        toast.success("Lưu thông tin thành công!")
         dispatch({
           type: actionTypes.GET_ALL_DOCTORS_SUCCESS,
           listDoctors: res.doctors,
         })
       } else {
-        toast.error("Lưu thông tin thất bại!")
-
         dispatch({ type: actionTypes.GET_ALL_DOCTORS_FAILED })
       }
     } catch (e) {
-      toast.error("Lưu thông tin thất bại!")
-
       dispatch({ type: actionTypes.GET_ALL_DOCTORS_FAILED })
     }
   }
@@ -225,17 +220,21 @@ export const saveInforDoctor = (data) => {
   return async (dispatch) => {
     try {
       let res = await userService.saveInfoDoctor(data)
-      console.log("Data sent: ", data)
-      console.log("Res: ", res)
 
       if (res && res.errCode === 0) {
+        toast.success("Lưu thông tin thành công!")
+
         dispatch({
           type: actionTypes.SAVE_INFO_DOCTOR_FAILED,
         })
       } else {
+        toast.error("Lưu thông tin thất bại!")
+
         dispatch({ type: actionTypes.SAVE_INFO_DOCTOR_FAILED })
       }
     } catch (e) {
+      toast.error("Lưu thông tin thất bại!")
+
       dispatch({ type: actionTypes.SAVE_INFO_DOCTOR_FAILED })
     }
   }

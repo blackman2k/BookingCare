@@ -1,4 +1,7 @@
+@import "../../../styles/variables";
+
 .detailDoctor {
+  margin-top: $height-header;
   .header {
     display: flex;
     .avatar {

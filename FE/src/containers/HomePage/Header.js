@@ -9,10 +9,16 @@ import { dispatch } from "../../redux"
 import { connect } from "react-redux"
 import { FaTooth, FaHeadSideVirus } from "react-icons/fa"
 import { languages } from "../../utils"
+import { withRouter } from "react-router"
 
 function Header(props) {
   const handleChangeLanguage = (language) => {
     props.changeLanguage(language)
+  }
+
+  const handleCickLogo = (e) => {
+    console.log(props)
+    props.history.push("/home")
   }
 
   return (
@@ -21,7 +27,10 @@ function Header(props) {
         <div className={clsx(styles.headerWrapper, "container")}>
           <div className={clsx(styles.headerLogo)}>
             <i className="fas fa-bars"></i>
-            <div className={styles.headerLogoImage}></div>
+            <div
+              className={styles.headerLogoImage}
+              onClick={handleCickLogo}
+            ></div>
           </div>
           <div className={clsx(styles.headerList)}>
             <div className={styles.headerItemList}>
@@ -91,72 +100,74 @@ function Header(props) {
           </div>
         </div>
       </div>
-      <div className={styles.bannerHomePage}>
-        <div className={styles.content}>
-          <div className={styles.title}>
-            <h2>
-              <FormattedMessage id="banner.title1" /> <br />{" "}
-              <b>
-                <FormattedMessage id="banner.title2" />
-              </b>
-            </h2>
-          </div>
-          <div className={styles.search}>
-            <input type="text" placeholder="Nhập nội dung tìm kiếm" />
-            <i className="fas fa-search"></i>
-          </div>
-          <div className={styles.listOptions}>
-            <div className={styles.optionItem}>
-              <div className={styles.iconOptions}>
-                <i className="fas fa-hospital"></i>
-              </div>
-              <p className={styles.titleOptions}>
-                <FormattedMessage id="banner.option1" />
-              </p>
+      {props.isShowBanner && (
+        <div className={styles.bannerHomePage}>
+          <div className={styles.content}>
+            <div className={styles.title}>
+              <h2>
+                <FormattedMessage id="banner.title1" /> <br />{" "}
+                <b>
+                  <FormattedMessage id="banner.title2" />
+                </b>
+              </h2>
             </div>
-            <div className={styles.optionItem}>
-              <div className={styles.iconOptions}>
-                <i className="fas fa-mobile"></i>
-              </div>
-              <p className={styles.titleOptions}>
-                <FormattedMessage id="banner.option2" />
-              </p>
+            <div className={styles.search}>
+              <input type="text" placeholder="Nhập nội dung tìm kiếm" />
+              <i className="fas fa-search"></i>
             </div>
-            <div className={styles.optionItem}>
-              <div className={styles.iconOptions}>
-                <i className="fas fa-notes-medical"></i>
+            <div className={styles.listOptions}>
+              <div className={styles.optionItem}>
+                <div className={styles.iconOptions}>
+                  <i className="fas fa-hospital"></i>
+                </div>
+                <p className={styles.titleOptions}>
+                  <FormattedMessage id="banner.option1" />
+                </p>
               </div>
-              <p className={styles.titleOptions}>
-                <FormattedMessage id="banner.option3" />
-              </p>
-            </div>
-            <div className={styles.optionItem}>
-              <div className={styles.iconOptions}>
-                <i className="fas fa-vial"></i>
+              <div className={styles.optionItem}>
+                <div className={styles.iconOptions}>
+                  <i className="fas fa-mobile"></i>
+                </div>
+                <p className={styles.titleOptions}>
+                  <FormattedMessage id="banner.option2" />
+                </p>
               </div>
-              <p className={styles.titleOptions}>
-                <FormattedMessage id="banner.option4" />
-              </p>
-            </div>
-            <div className={styles.optionItem}>
-              <div className={styles.iconOptions}>
-                <FaHeadSideVirus />
+              <div className={styles.optionItem}>
+                <div className={styles.iconOptions}>
+                  <i className="fas fa-notes-medical"></i>
+                </div>
+                <p className={styles.titleOptions}>
+                  <FormattedMessage id="banner.option3" />
+                </p>
               </div>
-              <p className={styles.titleOptions}>
-                <FormattedMessage id="banner.option5" />
-              </p>
-            </div>
-            <div className={styles.optionItem}>
-              <div className={styles.iconOptions}>
-                <FaTooth />
+              <div className={styles.optionItem}>
+                <div className={styles.iconOptions}>
+                  <i className="fas fa-vial"></i>
+                </div>
+                <p className={styles.titleOptions}>
+                  <FormattedMessage id="banner.option4" />
+                </p>
               </div>
-              <p className={styles.titleOptions}>
-                <FormattedMessage id="banner.option6" />
-              </p>
+              <div className={styles.optionItem}>
+                <div className={styles.iconOptions}>
+                  <FaHeadSideVirus />
+                </div>
+                <p className={styles.titleOptions}>
+                  <FormattedMessage id="banner.option5" />
+                </p>
+              </div>
+              <div className={styles.optionItem}>
+                <div className={styles.iconOptions}>
+                  <FaTooth />
+                </div>
+                <p className={styles.titleOptions}>
+                  <FormattedMessage id="banner.option6" />
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
@@ -174,4 +185,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))

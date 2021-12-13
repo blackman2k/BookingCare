@@ -132,7 +132,6 @@ const adminReducer = (state = initialState, action) => {
         ...state,
       }
     case actionTypes.SAVE_INFO_DOCTOR_FAILED:
-      state.listDoctors = []
       return {
         ...state,
       }
