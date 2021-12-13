@@ -4,11 +4,13 @@ import styles from "./ManageSchedule.module.scss"
 import { FormattedMessage } from "react-intl"
 import Select from "react-select"
 import * as actions from "../../../store/actions"
-import { CRUD_ACTIONS, LANGUAGES } from "../../../utils"
+import { CRUD_ACTIONS, LANGUAGES, dateFormat } from "../../../utils"
 import { DatePicker } from "../../../components/Input/"
 import moment from "moment"
 import { Button, Col, Form, Row } from "react-bootstrap"
 import clsx from "clsx"
+import { toast } from "react-toastify"
+import _ from "lodash"
 
 export class MangeSchedule extends Component {
   constructor(props) {
@@ -35,10 +37,59 @@ export class MangeSchedule extends Component {
       })
     }
     if (prevProps.allScheduleTime != this.props.allScheduleTime) {
+      let data = this.props.allScheduleTime
+      if (data && data.length > 0) {
+        data = data.map((item) => ({ ...item, isSelected: false }))
+      }
+
       this.setState({
-        rangeTime: this.props.allScheduleTime,
+        rangeTime: data,
       })
     }
+  }
+
+  handleClickBtnTime = (time) => {
+    let { rangeTime } = this.state
+    if (rangeTime && rangeTime.length > 0) {
+      rangeTime = rangeTime.map((item) => {
+        if (item.id === time.id) item.isSelected = !item.isSelected
+        return item
+      })
+      this.setState({
+        rangeTime: rangeTime,
+      })
+    }
+  }
+
+  handleSaveShedult = () => {
+    const { rangeTime, selectedDoctor, currentDate } = this.state
+    let result = []
+
+    if (!currentDate) {
+      toast.error("Invalid date!")
+      return
+    }
+    if (selectedDoctor && _.isEmpty(selectedDoctor)) {
+      toast.error("Invalid selected doctor!")
+      return
+    }
+    let formatDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER)
+    if (rangeTime && rangeTime.length > 0) {
+      let selectedTime = rangeTime.filter((item) => item.isSelected === true)
+      if (selectedTime && selectedTime.length > 0) {
+        selectedTime.forEach((schedule, index) => {
+          let object = {}
+          object.doctorId = selectedDoctor.value
+          object.date = formatDate
+          object.time = schedule.keyMap
+          result.push(object)
+        })
+      } else {
+        toast.error("Invalid selected time!")
+        return
+      }
+    }
+    console.log("Result: ", result)
   }
 
   buildDataInputSelect = (inputData) => {
@@ -50,7 +101,7 @@ export class MangeSchedule extends Component {
         let labelVi = `${item.lastName} ${item.firstName}`
         let labelEn = `${item.firstName} ${item.lastName}`
         object.label = language === LANGUAGES.VI ? labelVi : labelEn
-        object.value = item.div
+        object.value = item.id
         result.push(object)
       })
     }
@@ -104,14 +155,19 @@ export class MangeSchedule extends Component {
             rangeTime.length > 0 &&
             rangeTime.map((item, index) => {
               return (
-                <Button variant="outline-info" className={styles.itemTime}>
+                <Button
+                  variant="outline-info"
+                  active={item.isSelected}
+                  className={styles.itemTime}
+                  onClick={() => this.handleClickBtnTime(item)}
+                >
                   {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
                 </Button>
               )
             })}
         </div>
 
-        <Button className="mt-3">
+        <Button className="mt-3" onClick={() => this.handleSaveShedult()}>
           <FormattedMessage id="manage-schedule.save" />
         </Button>
       </div>
