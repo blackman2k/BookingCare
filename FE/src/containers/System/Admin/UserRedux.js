@@ -6,7 +6,7 @@ import styles from "./UserRedux.module.scss"
 import { Form, Row, Col, Button } from "react-bootstrap"
 import * as actions from "../../../store/actions/adminAction"
 import userService from "../../../services/userService"
-import { languages } from "../../../utils"
+import { LANGUAGES } from "../../../utils"
 import Lightbox from "react-image-lightbox"
 import "react-image-lightbox/style.css" // This only needs to be imported once in your app
 import TableUserManage from "./TablesUserManage"
@@ -29,7 +29,7 @@ function UserRedux(props) {
   const [listGenders, setListGender] = useState([])
   const [listPositions, setListPositions] = useState([])
   const [listRoles, setListRoles] = useState([])
-  const [languages, setLanguages] = useState("")
+  const [LANGUAGES, setLanguages] = useState("")
   const [isLoading, setLoading] = useState(true)
   const [previewAvaUrl, setPreviewAavUrl] = useState("")
   const [isOpenPreview, setIsOpenPreview] = useState(false)
@@ -79,8 +79,8 @@ function UserRedux(props) {
     })
   }, [props.listRoles])
   useEffect(() => {
-    setLanguages(props.languages)
-  }, [props.languages])
+    setLanguages(props.LANGUAGES)
+  }, [props.LANGUAGES])
   useEffect(() => {
     setLoading(props.isLoading)
   }, [props.isLoading])
@@ -297,7 +297,7 @@ function UserRedux(props) {
                   listGenders.map((item, index) => {
                     return (
                       <option key={index} value={item.keyMap}>
-                        {languages === "vi" ? item.valueVi : item.valueEn}
+                        {LANGUAGES === "vi" ? item.valueVi : item.valueEn}
                       </option>
                     )
                   })}
@@ -320,7 +320,7 @@ function UserRedux(props) {
                   listPositions.map((item, index) => {
                     return (
                       <option key={index} value={item.keyMap}>
-                        {languages === "vi" ? item.valueVi : item.valueEn}
+                        {LANGUAGES === "vi" ? item.valueVi : item.valueEn}
                       </option>
                     )
                   })}
@@ -343,7 +343,7 @@ function UserRedux(props) {
                   listRoles.map((item, index) => {
                     return (
                       <option key={index} value={item.keyMap}>
-                        {languages === "vi" ? item.valueVi : item.valueEn}
+                        {LANGUAGES === "vi" ? item.valueVi : item.valueEn}
                       </option>
                     )
                   })}
@@ -396,7 +396,7 @@ const mapStateToProps = (state) => {
     listGenders: state.admin.listGenders,
     listPositions: state.admin.listPositions,
     listRoles: state.admin.listRoles,
-    languages: state.app.language,
+    LANGUAGES: state.app.language,
     isLoading:
       state.app.isLoadDingGender ||
       state.app.isLoadingPosition ||

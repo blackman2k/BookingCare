@@ -4,7 +4,7 @@ import { Button, Container } from "react-bootstrap"
 import * as actions from "../../../store/actions/adminAction"
 import { connect } from "react-redux"
 import Select from "react-select"
-import { languages } from "../../../utils"
+import { LANGUAGES } from "../../../utils"
 import clsx from "clsx"
 import { userService } from "../../../services"
 import Header from "../../HomePage/Header"
@@ -60,7 +60,7 @@ class DetailDoctor extends Component {
             ></div>
             <div className={styles.contentHeader}>
               <div className={styles.titleContent}>
-                {language === languages.vi ? nameVi : nameEn}
+                {language === LANGUAGES.vi ? nameVi : nameEn}
               </div>
               <div className={styles.mainContent}>
                 {detailDoctor &&

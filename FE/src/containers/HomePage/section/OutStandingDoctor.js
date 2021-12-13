@@ -2,7 +2,7 @@ import styles from "./Section.module.scss"
 import Slider from "react-slick"
 import clsx from "clsx"
 import { Container } from "react-bootstrap"
-import { languages } from "../../../utils"
+import { LANGUAGES } from "../../../utils"
 import { Component } from "react"
 import { dispatch } from "../../../redux"
 import { withRouter } from "react-router"
@@ -110,7 +110,7 @@ class OutStandingDotor extends Component {
                         style={{ backgroundImage: `url(${imageBase64})` }}
                       ></div>
                       <h6 className={styles.nameDoctor}>
-                        {language === languages.VI ? nameVi : nameEn}
+                        {language === LANGUAGES.VI ? nameVi : nameEn}
                       </h6>
                       <span className={styles.positionDoctor}>Tiêu hóa</span>
                     </div>

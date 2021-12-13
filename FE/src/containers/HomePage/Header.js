@@ -8,7 +8,7 @@ import { changeLanguage } from "../../store/actions"
 import { dispatch } from "../../redux"
 import { connect } from "react-redux"
 import { FaTooth, FaHeadSideVirus } from "react-icons/fa"
-import { languages } from "../../utils"
+import { LANGUAGES } from "../../utils"
 import { withRouter } from "react-router"
 
 function Header(props) {
@@ -83,7 +83,7 @@ function Header(props) {
               <span
                 onClick={() => handleChangeLanguage("vi")}
                 className={clsx({
-                  [styles.active]: props.language === languages.VI,
+                  [styles.active]: props.language === LANGUAGES.VI,
                 })}
               >
                 VI
@@ -91,7 +91,7 @@ function Header(props) {
               <span
                 onClick={() => handleChangeLanguage("en")}
                 className={clsx({
-                  [styles.active]: props.language === languages.EN,
+                  [styles.active]: props.language === LANGUAGES.EN,
                 })}
               >
                 EN

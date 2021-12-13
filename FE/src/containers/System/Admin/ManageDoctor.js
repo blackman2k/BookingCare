@@ -4,7 +4,7 @@ import { Button, Container } from "react-bootstrap"
 import * as actions from "../../../store/actions/adminAction"
 import { connect } from "react-redux"
 import Select from "react-select"
-import { languages } from "../../../utils"
+import { LANGUAGES } from "../../../utils"
 
 import MarkdownIt from "markdown-it"
 import MdEditor from "react-markdown-editor-lite"
@@ -84,7 +84,7 @@ class ManageDoctor extends Component {
   handleConvertDataToSelect = (data) => {
     return data.map((item) => {
       let label = ""
-      if (this.props.language === languages.VI) {
+      if (this.props.language === LANGUAGES.VI) {
         label = `${item.lastName} ${item.firstName}`
       } else {
         label = `${item.firstName} ${item.lastName} `
