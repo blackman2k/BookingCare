@@ -12,6 +12,7 @@ import clsx from "clsx"
 import { toast } from "react-toastify"
 import _ from "lodash"
 import userService from "../../../services/userService"
+import { escapeRE } from "markdown-it/lib/common/utils"
 
 export class MangeSchedule extends Component {
   constructor(props) {
@@ -98,6 +99,12 @@ export class MangeSchedule extends Component {
       formatedDate: formatedDate,
     })
 
+    if (res && res.errCode === 0) {
+      toast.success("Save information succeed!")
+    } else {
+      toast.error("Error save!")
+    }
+
     console.log("Result: ", result)
   }
 
@@ -130,6 +137,7 @@ export class MangeSchedule extends Component {
   render() {
     const { rangeTime } = this.state
     const { language } = this.props
+    let yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
     return (
       <div className="container">
         <h2 className="text-center mt-3">
@@ -155,7 +163,7 @@ export class MangeSchedule extends Component {
               onChange={this.handleOnChangeDatePicker}
               className="form-control"
               value={this.state.currentDate}
-              minDate={new Date()}
+              minDate={yesterday}
             />
           </Col>
         </Row>

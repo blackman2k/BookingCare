@@ -7,6 +7,7 @@ import { LANGUAGES } from "../../../utils"
 import userService from "../../../services/userService"
 import { divide } from "lodash"
 import { Button, Form } from "react-bootstrap"
+import { FormattedMessage } from "react-intl"
 
 export class DoctorSchedule extends Component {
   constructor(props) {
@@ -19,37 +20,65 @@ export class DoctorSchedule extends Component {
 
   async componentDidMount() {
     const { language } = this.props
-    this.setArrDays(language)
+    let allDays = this.getArrDays(language)
+    this.setState({
+      allDays: allDays,
+    })
   }
 
   capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1)
   }
 
-  setArrDays = (language) => {
+  getArrDays = (language) => {
     let allDays = []
     for (let i = 0; i < 7; i++) {
       let object = {}
       if (language === LANGUAGES.VI) {
-        let labelVi = moment(new Date()).add(i, "days").format("dddd - DD/MM")
-        object.label = this.capitalizeFirstLetter(labelVi)
+        if (i === 0) {
+          let ddMM = moment(new Date()).format("DD/MM")
+          let today = `Hôm nay - ${ddMM}`
+          object.label = today
+        } else {
+          let labelVi = moment(new Date()).add(i, "days").format("dddd - DD/MM")
+          object.label = this.capitalizeFirstLetter(labelVi)
+        }
       } else {
-        object.label = moment(new Date())
-          .add(i, "days")
-          .locale("en")
-          .format("ddd - DD/MM")
+        if (i === 0) {
+          let ddMM = moment(new Date()).format("DD/MM")
+          let today = `Today - ${ddMM}`
+          object.label = today
+        } else {
+          object.label = moment(new Date())
+            .add(i, "days")
+            .locale("en")
+            .format("ddd - DD/MM")
+        }
       }
       object.value = moment(new Date()).add(i, "days").startOf("day").valueOf()
       allDays.push(object)
     }
-    this.setState({
-      allDays: allDays,
-    })
+
+    return allDays
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     if (this.props.language !== prevProps.language) {
-      this.setArrDays(this.props.language)
+      let allDays = this.getArrDays(this.props.language)
+      this.setState({
+        allDays: allDays,
+      })
+    }
+
+    if (this.props.doctorIdFromParent !== prevProps.doctorIdFromParent) {
+      let allDays = this.getArrDays(this.props.language)
+      let res = await userService.getScheduleDoctorByDate(
+        this.props.doctorIdFromParent,
+        allDays[0].value
+      )
+      this.setState({
+        allAvalableTime: res.data ? res.data : [],
+      })
     }
   }
 
@@ -90,27 +119,36 @@ export class DoctorSchedule extends Component {
           </Form.Select>
           <p className={styles.titleCalendar}>
             <i class="fas fa-calendar"></i>
-            LỊCH KHÁM
+            <span>
+              <FormattedMessage id="patient.detail-doctor.schedule" />
+            </span>
           </p>
           <div className={styles.scheduleContainer}>
             {allAvalableTime && allAvalableTime.length > 0 ? (
-              allAvalableTime.map((item, index) => {
-                {
-                  let timeDisplay =
-                    language === LANGUAGES.VI
-                      ? item.timeTypeData.valueVi
-                      : item.timeTypeData.valueEn
-                  return (
-                    <Button variant="warning" key={index}>
-                      {timeDisplay}
-                    </Button>
-                  )
-                }
-              })
+              <>
+                {allAvalableTime.map((item, index) => {
+                  {
+                    let timeDisplay =
+                      language === LANGUAGES.VI
+                        ? item.timeTypeData.valueVi
+                        : item.timeTypeData.valueEn
+                    return (
+                      <Button variant="warning" key={index}>
+                        {timeDisplay}
+                      </Button>
+                    )
+                  }
+                })}
+
+                {/* <p>
+                  <FormattedMessage id="patient.detail-doctor.choose" />
+                  <i className="far fa-hand-point-up"></i>
+                  <FormattedMessage id="patient.detail-doctor.book-free" />
+                </p> */}
+              </>
             ) : (
               <p>
-                Không có lịch hẹn trong thời gian này, vui lòng chọn thời gian
-                khác
+                <FormattedMessage id="patient.detail-doctor.no-schedule" />
               </p>
             )}
           </div>
