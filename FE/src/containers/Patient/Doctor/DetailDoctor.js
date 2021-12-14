@@ -9,6 +9,7 @@ import clsx from "clsx"
 import { userService } from "../../../services"
 import Header from "../../HomePage/Header"
 import DoctorSchedule from "./DoctorSchedule"
+import DoctorExtraInfor from "./DoctorExtraInfor"
 
 class DetailDoctor extends Component {
   constructor(props) {
@@ -77,9 +78,18 @@ class DetailDoctor extends Component {
             </div>
           </header>
           <main className={clsx(styles.main, "mt-3")}>
-            <section className={styles.scheduleDoctor}>
-              <DoctorSchedule doctorIdFromParent={this.state.currentDoctorId} />
-            </section>
+            <div className={styles.doctorScheduleContainer}>
+              <div className={styles.allSchedule}>
+                <DoctorSchedule
+                  doctorIdFromParent={this.state.currentDoctorId}
+                />
+              </div>
+              <div className={styles.addressContainer}>
+                <DoctorExtraInfor
+                  doctorIdFromParent={this.state.currentDoctorId}
+                />
+              </div>
+            </div>
             <section className={styles.detaiInforDoctor}>
               {detailDoctor &&
                 detailDoctor.Markdown &&

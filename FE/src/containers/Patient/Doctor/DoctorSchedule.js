@@ -139,12 +139,6 @@ export class DoctorSchedule extends Component {
                     )
                   }
                 })}
-
-                {/* <p>
-                  <FormattedMessage id="patient.detail-doctor.choose" />
-                  <i className="far fa-hand-point-up"></i>
-                  <FormattedMessage id="patient.detail-doctor.book-free" />
-                </p> */}
               </>
             ) : (
               <p>
