@@ -62,34 +62,76 @@ const getAllDoctors = () => {
   })
 }
 
-const saveDetailInforDoctor = (data) => {
+const saveDetailInforDoctor = (inputData) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!data.doctorId || !data.contentHTML || !data.contentMarkdown) {
+      if (
+        !inputData.doctorId ||
+        !inputData.contentHTML ||
+        !inputData.contentMarkdown ||
+        !inputData.selectedPrice ||
+        !inputData.selectedPayment ||
+        !inputData.selectProvince ||
+        !inputData.nameClinic ||
+        !inputData.addressClinic ||
+        !inputData.note
+      ) {
         resolve({
           errCode: 1,
           errMessage: "Missing parameters",
         })
       } else {
-        let markdownUser = await db.Markdown.findOne({
+        //upsert to Markdown
+        if (inputData.action === "CREATE") {
+          await db.Markdown.create({
+            contentHTML: inputData.contentHTML,
+            contentMarkdown: inputData.contentMarkdown,
+            description: inputData.description,
+            doctorId: inputData.doctorId,
+          })
+        } else if (inputData.action === "EDIT") {
+          let doctorMarkdown = await db.Markdown.findOne({
+            where: { doctorId: inputData.doctorId },
+            raw: false,
+          })
+
+          if (doctorMarkdown) {
+            doctorMarkdown.contentHTML = inputData.contentHTML
+            doctorMarkdown.contentMarkdown = inputData.contentMarkdown
+            doctorMarkdown.description = inputData.description
+            doctorMarkdown.updateAt = new Date()
+            await doctorMarkdown.save()
+          }
+        }
+
+        //upsert to Doctor_infor table
+        let doctorInfor = await db.Doctor_Infor.findOne({
           where: {
-            doctorId: data.doctorId,
+            doctorId: inputData.doctorId,
           },
           raw: false,
         })
-        if (markdownUser) {
-          console.log("Da co du lieu", markdownUser)
-          markdownUser.contentHTML = data.contentHTML
-          markdownUser.contentMarkdown = data.contentMarkdown
-          markdownUser.description = data.description
-          markdownUser.doctorId = data.doctorId
-          await markdownUser.save()
+
+        if (doctorInfor) {
+          //update
+          doctorInfor.doctorId = inputData.doctorId
+          doctorInfor.priceId = inputData.selectedPrice
+          doctorInfor.paymentId = inputData.selectedPayment
+          doctorInfor.provinceId = inputData.selectProvince
+          doctorInfor.nameClinic = inputData.nameClinic
+          doctorInfor.addressClinic = inputData.addressClinic
+          doctorInfor.note = inputData.note
+          await doctorInfor.save()
         } else {
-          await db.Markdown.create({
-            contentHTML: data.contentHTML,
-            contentMarkdown: data.contentMarkdown,
-            description: data.description,
-            doctorId: data.doctorId,
+          //create
+          await db.Doctor_Infor.create({
+            doctorId: inputData.doctorId,
+            priceId: inputData.selectedPrice,
+            paymentId: inputData.selectedPayment,
+            provinceId: inputData.selectProvince,
+            nameClinic: inputData.nameClinic,
+            addressClinic: inputData.addressClinic,
+            note: inputData.note,
           })
         }
 

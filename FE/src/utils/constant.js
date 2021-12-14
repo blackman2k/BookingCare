@@ -32,3 +32,8 @@ export const USER_ROLE = {
   DOCTOR: "R2",
   PATIENT: "R3",
 }
+export const CRUD_ACTIONS = {
+  CREATE: "CREATE",
+  EDIT: "EDIT",
+  DELETE: "DELETE",
+}
