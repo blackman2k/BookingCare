@@ -28,8 +28,6 @@ function SamplePrevArrow(props) {
 }
 
 function HandBook() {
-  console.log("styles: ", styles)
-
   const settings = {
     dots: false,
     infinite: true,

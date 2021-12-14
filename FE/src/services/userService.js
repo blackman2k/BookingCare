@@ -53,6 +53,12 @@ const saveBulkScheduleDoctor = (data) => {
   return axios.post("/api/bulk-create-schedule", data)
 }
 
+const getScheduleDoctorByDate = (doctorId, date) => {
+  return axios.get(
+    `/api/get-schedule-doctor-by-date?doctorId=${doctorId}&date=${date}`
+  )
+}
+
 const userService = {
   handleLogin,
   getAllUsers,
@@ -65,6 +71,7 @@ const userService = {
   saveInfoDoctor,
   getDetailInforDoctor,
   saveBulkScheduleDoctor,
+  getScheduleDoctorByDate,
 }
 
 export default userService
