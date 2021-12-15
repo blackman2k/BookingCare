@@ -40,7 +40,11 @@ export class BookingModal extends Component {
         </Modal.Header>
         <Modal.Body>
           <div className={styles.doctorInfor}>
-            <ProfileDoctor doctorId={doctorId} />
+            <ProfileDoctor
+              doctorId={doctorId}
+              isShowDescriptionDoctor={false}
+              dataTime={dataTime}
+            />
           </div>
           <Form>
             <Row className="mb-3">

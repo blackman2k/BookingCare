@@ -5,6 +5,8 @@ import { getProfileDoctorById } from "../../../services/userService"
 import { LANGUAGES } from "../../../utils"
 import NumberFormat from "react-number-format"
 import styles from "./ProfileDoctor.module.scss"
+import _ from "lodash"
+import moment, { lang } from "moment"
 
 export class ProfileDoctor extends Component {
   constructor(props) {
@@ -38,9 +40,35 @@ export class ProfileDoctor extends Component {
     }
   }
 
+  renderTimeBooking = (dataTime) => {
+    const { language } = this.props
+    if (dataTime && !_.isEmpty(dataTime)) {
+      let time =
+        language === LANGUAGES.VI
+          ? dataTime.timeTypeData.valueVi
+          : dataTime.timeTypeData.valueEn
+      let date =
+        language === LANGUAGES.VI
+          ? moment.unix(+dataTime.date / 1000).format("dddd - DD/MM")
+          : moment
+              .unix(+dataTime.date / 1000)
+              .locale("en")
+              .format("ddd - DD/MM")
+      return (
+        <>
+          <div>
+            {time} - {date}
+          </div>
+          <div>Miễn phí đặt lịch</div>
+        </>
+      )
+    }
+    return <></>
+  }
+
   render() {
     const { dataProfile } = this.state
-    const { language } = this.props
+    const { language, isShowDescriptionDoctor, dataTime } = this.props
     console.log("Dataprofile: ", dataProfile)
 
     let nameVi = "",
@@ -67,11 +95,17 @@ export class ProfileDoctor extends Component {
               {language === LANGUAGES.VI ? nameVi : nameEn}
             </div>
             <div className={styles.description}>
-              {dataProfile &&
-                dataProfile.Markdown &&
-                dataProfile.Markdown.description && (
-                  <span>{dataProfile.Markdown.description}</span>
-                )}
+              {isShowDescriptionDoctor === true ? (
+                <>
+                  {dataProfile &&
+                    dataProfile.Markdown &&
+                    dataProfile.Markdown.description && (
+                      <span>{dataProfile.Markdown.description}</span>
+                    )}
+                </>
+              ) : (
+                <>{this.renderTimeBooking(dataTime)}</>
+              )}
             </div>
           </div>
         </div>
