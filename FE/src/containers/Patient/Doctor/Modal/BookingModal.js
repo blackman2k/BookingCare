@@ -3,6 +3,8 @@ import { connect } from "react-redux"
 import { FormattedMessage } from "react-intl"
 import styles from "./BookingModal.module.scss"
 import { Modal, Button, Form, Col, Row } from "react-bootstrap"
+import ProfileDoctor from "../ProfileDoctor"
+import _ from "lodash"
 
 export class BookingModal extends Component {
   constructor(props) {
@@ -19,6 +21,10 @@ export class BookingModal extends Component {
 
   render() {
     const { isOpenModal, closeBookingClose, dataTime } = this.props
+    let doctorId = ""
+    if (dataTime && !_.isEmpty(dataTime)) {
+      doctorId = dataTime.doctorId
+    }
 
     return (
       <Modal
@@ -33,8 +39,9 @@ export class BookingModal extends Component {
           <Modal.Title>Thông tin đặt lịch khám bệnh</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className={styles.doctorInfor}></div>
-          <div className={styles.price}>Giá khám 500.000VND</div>
+          <div className={styles.doctorInfor}>
+            <ProfileDoctor doctorId={doctorId} />
+          </div>
           <Form>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="name">

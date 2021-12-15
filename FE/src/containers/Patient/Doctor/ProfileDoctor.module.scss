@@ -1,0 +1,25 @@
+.profileDoctorContainer {
+  .introDoctor {
+    display: flex;
+    margin-bottom: 15px;
+    .avatar {
+      $heightAva: 100px;
+      height: $heightAva;
+      width: $heightAva;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    .inforDoctor {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .nameDoctor {
+        font-weight: 500;
+      }
+    }
+  }
+}

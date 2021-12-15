@@ -138,7 +138,7 @@ export class DoctorSchedule extends Component {
             })}
         </Form.Select>
         <p className={styles.titleCalendar}>
-          <i class="fas fa-calendar"></i>
+          <i className="fas fa-calendar"></i>
           <span>
             <FormattedMessage id="patient.detail-doctor.schedule" />
           </span>
