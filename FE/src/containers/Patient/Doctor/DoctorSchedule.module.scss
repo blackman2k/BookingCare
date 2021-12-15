@@ -1,39 +1,23 @@
 @import "../../../styles/variables";
 
-.doctorScheduleContainer {
-  display: flex;
-  gap: 10px;
-  padding: 20px 0;
-  .allSchedule {
-    flex: 1;
-    flex-basis: 50%;
-    padding: 20px 0;
-
-    .selectTime {
-      width: min-content;
-      margin-bottom: 20px;
-      font-weight: 500;
-      option {
-        font-weight: 500;
-      }
-    }
-    .titleCalendar {
-      font-size: 17px;
-      font-weight: 500;
-      color: $primary-color;
-      i {
-        margin-right: 10px;
-      }
-    }
-    .scheduleContainer {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
+.selectTime {
+  width: min-content;
+  margin-bottom: 20px;
+  font-weight: 500;
+  option {
+    font-weight: 500;
   }
-  // .addressContainer {
-  //   flex: 1;
-  //   flex-basis: 50%;
-  //   padding: 20px 0;
-  // }
+}
+.titleCalendar {
+  font-size: 17px;
+  font-weight: 500;
+  color: $primary-color;
+  i {
+    margin-right: 10px;
+  }
+}
+.scheduleContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }

@@ -1,12 +1,32 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import styles from "./DoctorExtraInfor.module.scss"
+import { getExtraInforDoctorById } from "../../../services/userService"
+import NumberFormat from "react-number-format"
+import { FormattedMessage } from "react-intl"
+import { LANGUAGES } from "../../../utils"
+import { Accordion } from "react-bootstrap"
 
-export class DoctorExtraInfor extends Component {
+class DoctorExtraInfor extends Component {
   constructor(props) {
     super(props)
     this.state = {
       isShowDetailInfor: false,
+      extraInfor: {},
+    }
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (this.props.language !== prevProps.language) {
+    }
+
+    if (this.props.doctorIdFromParent !== prevProps.doctorIdFromParent) {
+      let res = await getExtraInforDoctorById(this.props.doctorIdFromParent)
+      if (res && res.errCode === 0) {
+        this.setState({
+          extraInfor: res.data,
+        })
+      }
     }
   }
 
@@ -17,52 +37,108 @@ export class DoctorExtraInfor extends Component {
   }
 
   render() {
-    const { isShowDetailInfor } = this.state
+    const { isShowDetailInfor, extraInfor } = this.state
+    const { language } = this.props
     return (
-      <div className={styles.extranInforCotainer}>
+      <>
         <div className={styles.contentUp}>
-          <p className={styles.titleAdress}>ĐỊA CHỈ KHÁM</p>
-          <p className={styles.nameClinic}>Phòng khám chuyên khóa Da Liễu</p>
+          <p className={styles.titleAdress}>
+            <FormattedMessage id="patient.extra-infor-doctor.text-address" />
+          </p>
+          <p className={styles.nameClinic}>
+            {extraInfor && extraInfor.nameClinic ? extraInfor.nameClinic : ""}
+          </p>
           <p className={styles.detailAddress}>
-            207 Phố Huế - Hai Bà Trưng - Hà Nội
+            {extraInfor && extraInfor.addressClinic
+              ? extraInfor.addressClinic
+              : ""}
           </p>
         </div>
         <div className={styles.contenDown}>
-          {isShowDetailInfor === false && (
-            <div className={styles.shortInfor}>
-              <p>GIÁ KHÁM: 250.000đ</p>
-              <span onClick={() => this.showHideDetailInfor(true)}>
-                Xem chi tiết
-              </span>
-            </div>
-          )}
-          {isShowDetailInfor === true && (
-            <>
-              <p className={styles.titlePrice}>GIÁ KHÁM .</p>
-              <div className={styles.detailInfor}>
-                <span className={styles.left}>Giá khám</span>
-                <span className={styles.right}>250.000đ</span>
-                <p className={styles.note}>
-                  Được ưu tiên khám trước khi đặt khám qua BookingCare
-                </p>
-              </div>
-              <p className={styles.payment}>
-                Người bệnh có thể thanh toán chi phí bằng hình thức tiền mặt
-              </p>
-              <div className={styles.hidePrice}>
-                <span onClick={() => this.showHideDetailInfor(false)}>
-                  Ẩn bảng giá
+          <Accordion defaultActiveKey="0">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>
+                <FormattedMessage id="patient.extra-infor-doctor.price" />
+                <span> </span>
+                {extraInfor &&
+                  extraInfor.priceTypeData &&
+                  language === LANGUAGES.VI && (
+                    <NumberFormat
+                      className="currency"
+                      value={extraInfor.priceTypeData.valueVi}
+                      displayType="text"
+                      thousandSeparator={true}
+                      suffix="VND"
+                    />
+                  )}
+                {extraInfor &&
+                  extraInfor.priceTypeData &&
+                  language === LANGUAGES.EN && (
+                    <NumberFormat
+                      className="currency"
+                      value={extraInfor.priceTypeData.valueEn}
+                      displayType="text"
+                      thousandSeparator={true}
+                      suffix="$"
+                    />
+                  )}
+              </Accordion.Header>
+              <Accordion.Body>
+                <span className={styles.left}>
+                  <FormattedMessage id="patient.extra-infor-doctor.price" />
                 </span>
-              </div>
-            </>
-          )}
+                <span className={styles.right}>
+                  {extraInfor &&
+                    extraInfor.priceTypeData &&
+                    language === LANGUAGES.VI && (
+                      <NumberFormat
+                        className="currency"
+                        value={extraInfor.priceTypeData.valueVi}
+                        displayType="text"
+                        thousandSeparator={true}
+                        suffix="VND"
+                      />
+                    )}
+                  {extraInfor &&
+                    extraInfor.priceTypeData &&
+                    language === LANGUAGES.EN && (
+                      <NumberFormat
+                        className="currency"
+                        value={extraInfor.priceTypeData.valueEn}
+                        displayType="text"
+                        thousandSeparator={true}
+                        suffix="$"
+                      />
+                    )}
+                </span>
+                <p className={styles.note}>
+                  {extraInfor && extraInfor.note ? extraInfor.note : ""}
+                </p>
+                <p className={styles.payment}>
+                  <FormattedMessage id="patient.extra-infor-doctor.payment" />
+                  {extraInfor &&
+                  extraInfor.paymentTypeData &&
+                  language === LANGUAGES.VI
+                    ? extraInfor.paymentTypeData.valueVi
+                    : ""}
+                  {extraInfor &&
+                  extraInfor.paymentTypeData &&
+                  language === LANGUAGES.EN
+                    ? extraInfor.paymentTypeData.valueEn
+                    : ""}
+                </p>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </div>
-      </div>
+      </>
     )
   }
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  language: state.app.language,
+})
 
 const mapDispatchToProps = {}
 

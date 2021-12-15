@@ -25,6 +25,17 @@
   .main {
     .doctorScheduleContainer {
       display: flex;
+      margin-bottom: 20px;
+      .allSchedule {
+        flex: 1;
+        flex-basis: 50%;
+        border-right: 1px solid #999;
+      }
+      .addressContainer {
+        padding-left: 20px;
+        flex: 1;
+        flex-basis: 50%;
+      }
     }
   }
 }

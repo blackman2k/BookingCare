@@ -101,54 +101,51 @@ export class DoctorSchedule extends Component {
     const { language } = this.props
 
     return (
-      <div className={styles.doctorScheduleContainer}>
-        <div className={styles.allSchedule}>
-          <Form.Select
-            onChange={(event) => this.handleOnChangeSelect(event)}
-            className={styles.selectTime}
-          >
-            {allDays &&
-              allDays.length > 0 &&
-              allDays.map((item, index) => {
-                return (
-                  <option value={item.value} key={index}>
-                    {item.label}
-                  </option>
-                )
+      <>
+        <Form.Select
+          onChange={(event) => this.handleOnChangeSelect(event)}
+          className={styles.selectTime}
+        >
+          {allDays &&
+            allDays.length > 0 &&
+            allDays.map((item, index) => {
+              return (
+                <option value={item.value} key={index}>
+                  {item.label}
+                </option>
+              )
+            })}
+        </Form.Select>
+        <p className={styles.titleCalendar}>
+          <i class="fas fa-calendar"></i>
+          <span>
+            <FormattedMessage id="patient.detail-doctor.schedule" />
+          </span>
+        </p>
+        <div className={styles.scheduleContainer}>
+          {allAvalableTime && allAvalableTime.length > 0 ? (
+            <>
+              {allAvalableTime.map((item, index) => {
+                {
+                  let timeDisplay =
+                    language === LANGUAGES.VI
+                      ? item.timeTypeData.valueVi
+                      : item.timeTypeData.valueEn
+                  return (
+                    <Button variant="warning" key={index}>
+                      {timeDisplay}
+                    </Button>
+                  )
+                }
               })}
-          </Form.Select>
-          <p className={styles.titleCalendar}>
-            <i class="fas fa-calendar"></i>
-            <span>
-              <FormattedMessage id="patient.detail-doctor.schedule" />
-            </span>
-          </p>
-          <div className={styles.scheduleContainer}>
-            {allAvalableTime && allAvalableTime.length > 0 ? (
-              <>
-                {allAvalableTime.map((item, index) => {
-                  {
-                    let timeDisplay =
-                      language === LANGUAGES.VI
-                        ? item.timeTypeData.valueVi
-                        : item.timeTypeData.valueEn
-                    return (
-                      <Button variant="warning" key={index}>
-                        {timeDisplay}
-                      </Button>
-                    )
-                  }
-                })}
-              </>
-            ) : (
-              <p>
-                <FormattedMessage id="patient.detail-doctor.no-schedule" />
-              </p>
-            )}
-          </div>
+            </>
+          ) : (
+            <p>
+              <FormattedMessage id="patient.detail-doctor.no-schedule" />
+            </p>
+          )}
         </div>
-        <div className={styles.addressContainer}></div>
-      </div>
+      </>
     )
   }
 }

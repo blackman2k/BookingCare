@@ -1,14 +1,14 @@
 import { reject } from "lodash"
 import axios from "../axios"
 
-const handleLogin = (email, password) => {
+export const handleLogin = (email, password) => {
   return axios.post("/api/login", {
     email,
     password,
   })
 }
 
-const getAllUsers = (id) => {
+export const getAllUsers = (id) => {
   return axios.get(`/api/get-all-users`, {
     params: {
       id,
@@ -16,47 +16,51 @@ const getAllUsers = (id) => {
   })
 }
 
-const createNewUserService = (data) => {
+export const createNewUserService = (data) => {
   return axios.post("/api/create-new-user", data)
 }
 
-const deleteUserService = (userId) => {
+export const deleteUserService = (userId) => {
   return axios.delete("/api/delete-user", {
     data: {
       id: userId,
     },
   })
 }
-const editUserService = (data) => {
+export const editUserService = (data) => {
   return axios.put("/api/edit-user", data)
 }
 
-const getAllCodeService = (type) => {
+export const getAllCodeService = (type) => {
   return axios.get(`/api/all-code?type=${type}`)
 }
 
-const getTopDoctorHomeService = (limit) => {
+export const getTopDoctorHomeService = (limit) => {
   return axios.get(`api/top-doctor-home?limit=${limit}`)
 }
-const getAllDoctors = () => {
+export const getAllDoctors = () => {
   return axios.get(`api/get-all-doctors`)
 }
-const saveInfoDoctor = (data) => {
+export const saveInfoDoctor = (data) => {
   return axios.post(`api/save-infor-doctor`, data)
 }
 
-const getDetailInforDoctor = (id) => {
+export const getDetailInforDoctor = (id) => {
   return axios.get(`/api/get-detail-doctor-by-id?id=${id}`)
 }
 
-const saveBulkScheduleDoctor = (data) => {
+export const saveBulkScheduleDoctor = (data) => {
   return axios.post("/api/bulk-create-schedule", data)
 }
 
-const getScheduleDoctorByDate = (doctorId, date) => {
+export const getScheduleDoctorByDate = (doctorId, date) => {
   return axios.get(
     `/api/get-schedule-doctor-by-date?doctorId=${doctorId}&date=${date}`
   )
+}
+
+export const getExtraInforDoctorById = (doctorId) => {
+  return axios.get(`/api/get-extra-infor-doctor-by-id?doctorId=${doctorId}`)
 }
 
 const userService = {
