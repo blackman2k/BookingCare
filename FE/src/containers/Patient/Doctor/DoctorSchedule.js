@@ -8,6 +8,7 @@ import userService from "../../../services/userService"
 import { divide } from "lodash"
 import { Button, Form } from "react-bootstrap"
 import { FormattedMessage } from "react-intl"
+import BookingModal from "./Modal/BookingModal"
 
 export class DoctorSchedule extends Component {
   constructor(props) {
@@ -15,6 +16,8 @@ export class DoctorSchedule extends Component {
     this.state = {
       allDays: [],
       allAvalableTime: [],
+      isOpenModalBooking: false,
+      dataScheduleTimeModal: {},
     }
   }
 
@@ -96,8 +99,26 @@ export class DoctorSchedule extends Component {
     }
   }
 
+  handleClickScheduleTime = (time) => {
+    this.setState({
+      isOpenModalBooking: true,
+      dataScheduleTimeModal: time,
+    })
+  }
+
+  closeBookingClose = () => {
+    this.setState({
+      isOpenModalBooking: false,
+    })
+  }
+
   render() {
-    const { allDays, allAvalableTime } = this.state
+    const {
+      allDays,
+      allAvalableTime,
+      isOpenModalBooking,
+      dataScheduleTimeModal,
+    } = this.state
     const { language } = this.props
 
     return (
@@ -132,7 +153,11 @@ export class DoctorSchedule extends Component {
                       ? item.timeTypeData.valueVi
                       : item.timeTypeData.valueEn
                   return (
-                    <Button variant="warning" key={index}>
+                    <Button
+                      variant="warning"
+                      key={index}
+                      onClick={() => this.handleClickScheduleTime(item)}
+                    >
                       {timeDisplay}
                     </Button>
                   )
@@ -145,6 +170,11 @@ export class DoctorSchedule extends Component {
             </p>
           )}
         </div>
+        <BookingModal
+          isOpenModal={isOpenModalBooking}
+          closeBookingClose={this.closeBookingClose}
+          dataTime={dataScheduleTimeModal}
+        />
       </>
     )
   }
