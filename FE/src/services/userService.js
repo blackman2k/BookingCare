@@ -73,6 +73,9 @@ export const postPatientBookAppointment = (data) => {
 export const postVerifyBookingAppointment = (data) => {
   return axios.post("/api/verify-book-appointment", data)
 }
+export const createNewSpecialty = (data) => {
+  return axios.post("/api/create-new-specialty", data)
+}
 
 const userService = {
   handleLogin,
@@ -90,6 +93,7 @@ const userService = {
   getProfileDoctorById,
   postPatientBookAppointment,
   postVerifyBookingAppointment,
+  createNewSpecialty,
 }
 
 export default userService
