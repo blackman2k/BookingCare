@@ -66,7 +66,7 @@ class DetailDoctor extends Component {
             ></div>
             <div className={styles.contentHeader}>
               <div className={styles.titleContent}>
-                {language === LANGUAGES.vi ? nameVi : nameEn}
+                {language === LANGUAGES.VI ? nameVi : nameEn}
               </div>
               <div className={styles.mainContent}>
                 {detailDoctor &&
