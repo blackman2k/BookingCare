@@ -1,8 +1,10 @@
 import styles from "./Section.module.scss"
 import Slider from "react-slick"
 import clsx from "clsx"
-// import { Container } from "react-bootstrap"
 import { Container } from "react-bootstrap"
+import { getAllSpecialty } from "../../../services/userService"
+import React, { Component } from "react"
+import { FormattedMessage } from "react-intl"
 
 function SampleNextArrow(props) {
   const { onClick } = props
@@ -28,55 +30,68 @@ function SamplePrevArrow(props) {
   )
 }
 
-function Specialty() {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+class Specialty extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      dataSpecialty: [],
+    }
   }
 
-  return (
-    <div className={clsx(styles.sectionsHomePage)}>
-      <Container>
-        <div className={styles.headerSection}>
-          <h3 className={styles.titleHeader}>Chuyên khoa phổ biến</h3>
-          <button className={styles.btnMoreInfo}>XEM THÊM</button>
-        </div>
-        <div className={styles.bodySection}>
-          <Slider {...settings}>
-            <div className={styles.itemSilder}>
-              <div className={styles.coverItem}></div>
-              <h6 className={styles.titleItem}>Cơ Xương Khớp</h6>
-            </div>
-            <div className={styles.itemSilder}>
-              <div className={styles.coverItem}></div>
-              <h6 className={styles.titleItem}>Thần kinh</h6>
-            </div>
-            <div className={styles.itemSilder}>
-              <div className={styles.coverItem}></div>
-              <h6 className={styles.titleItem}>Tiêu hóa</h6>
-            </div>
-            <div className={styles.itemSilder}>
-              <div className={styles.coverItem}></div>
-              <h6 className={styles.titleItem}>Tim mạch</h6>
-            </div>
-            <div className={styles.itemSilder}>
-              <div className={styles.coverItem}></div>
-              <h6 className={styles.titleItem}>Tai Mũi Họng</h6>
-            </div>
-            <div className={styles.itemSilder}>
-              <div className={styles.coverItem}></div>
-              <h6 className={styles.titleItem}>Cột sống</h6>
-            </div>
-          </Slider>
-        </div>
-      </Container>
-    </div>
-  )
+  async componentDidMount() {
+    let res = await getAllSpecialty()
+    if (res && res.errCode === 0) {
+      this.setState({
+        dataSpecialty: res.data ? res.data : [],
+      })
+    }
+  }
+
+  render() {
+    const { dataSpecialty } = this.state
+
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
+    }
+    return (
+      <div className={clsx(styles.sectionsHomePage)}>
+        <Container>
+          <div className={styles.headerSection}>
+            <h3 className={styles.titleHeader}>
+              <FormattedMessage id="homepage.specialty-poplular" />
+            </h3>
+            <button className={styles.btnMoreInfo}>
+              <FormattedMessage id="homepage.more-infor" />
+            </button>
+          </div>
+          <div className={styles.bodySection}>
+            <Slider {...settings}>
+              {dataSpecialty &&
+                dataSpecialty.length > 0 &&
+                dataSpecialty.map((item, index) => {
+                  return (
+                    <div className={styles.itemSilder}>
+                      <div
+                        className={styles.coverItem}
+                        style={{ backgroundImage: `url(${item.image})` }}
+                      ></div>
+                      <h6 className={styles.titleItem}>{item.name}</h6>
+                    </div>
+                  )
+                })}
+            </Slider>
+          </div>
+        </Container>
+      </div>
+    )
+  }
 }
 
 export default Specialty

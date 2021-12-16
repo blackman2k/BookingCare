@@ -57,6 +57,11 @@
     "edit": "Save",
     "upload": "Upload image"
   },
+  "homepage": {
+    "outstanding-doctor": "Last week's featured doctor",
+    "more-infor": "More information",
+    "specialty-poplular": "Popular specialties"
+  },
   "manage-schedule": {
     "title": "Manage doctor's examination plan",
     "choose-doctor": "Choose doctor",
