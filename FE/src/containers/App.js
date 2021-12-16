@@ -6,6 +6,7 @@ import { history } from "../redux"
 import { ToastContainer } from "react-toastify"
 import Doctor from "../routes/Doctor"
 import VerifyEmail from "./Patient/VerifyEmail"
+import DetailSpecialty from "./System/Specialty/DetailSpecialty"
 
 import {
   userIsAuthenticated,
@@ -66,6 +67,10 @@ class App extends Component {
                   />
                   <Route path={path.HOMEPAGE} component={HomePage} />
                   <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                  <Route
+                    path={path.DETAIL_SPECIALTY}
+                    component={DetailSpecialty}
+                  />
                   <Route
                     path={path.VERIFY_EMAIL_BOOKING}
                     component={VerifyEmail}

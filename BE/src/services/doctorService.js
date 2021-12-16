@@ -62,23 +62,44 @@ const getAllDoctors = () => {
   })
 }
 
+const checkRequiredFields = (inputData) => {
+  const arrFields = [
+    "doctorId",
+    "contentHTML",
+    "contentMarkdown",
+    "action",
+    "selectedPrice",
+    "selectedPayment",
+    "selectProvince",
+    "nameClinic",
+    "addressClinic",
+    "note",
+    "specialtyId",
+  ]
+
+  let isValid = true
+  let element = ""
+  for (let i = 0; i < arrFields.length; i++) {
+    if (!inputData[arrFields[i]]) {
+      isValid = false
+      element = arrFields[i]
+      break
+    }
+  }
+  return {
+    isValid,
+    element,
+  }
+}
+
 const saveDetailInforDoctor = (inputData) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (
-        !inputData.doctorId ||
-        !inputData.contentHTML ||
-        !inputData.contentMarkdown ||
-        !inputData.selectedPrice ||
-        !inputData.selectedPayment ||
-        !inputData.selectProvince ||
-        !inputData.nameClinic ||
-        !inputData.addressClinic ||
-        !inputData.note
-      ) {
+      let checkObj = checkRequiredFields(inputData)
+      if (checkObj.isValid === false) {
         resolve({
           errCode: 1,
-          errMessage: "Missing parameters",
+          errMessage: `Missing parameters: ${checkObj.element}`,
         })
       } else {
         //upsert to Markdown
@@ -121,6 +142,9 @@ const saveDetailInforDoctor = (inputData) => {
           doctorInfor.nameClinic = inputData.nameClinic
           doctorInfor.addressClinic = inputData.addressClinic
           doctorInfor.note = inputData.note
+          doctorInfor.clinicId = inputData.clinicId
+          doctorInfor.specialtyId = inputData.specialtyId
+
           await doctorInfor.save()
         } else {
           //create
@@ -132,6 +156,8 @@ const saveDetailInforDoctor = (inputData) => {
             nameClinic: inputData.nameClinic,
             addressClinic: inputData.addressClinic,
             note: inputData.note,
+            clinicId: inputData.clinicId,
+            specialtyId: inputData.specialtyId,
           })
         }
 

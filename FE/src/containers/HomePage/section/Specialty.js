@@ -5,6 +5,8 @@ import { Container } from "react-bootstrap"
 import { getAllSpecialty } from "../../../services/userService"
 import React, { Component } from "react"
 import { FormattedMessage } from "react-intl"
+import { withRouter } from "react-router"
+import { connect } from "react-redux"
 
 function SampleNextArrow(props) {
   const { onClick } = props
@@ -48,6 +50,12 @@ class Specialty extends Component {
     }
   }
 
+  handleViewDetailSpecialty = (item) => {
+    if (this.props.history) {
+      this.props.history.push(`/detail-specialty/${item.id}`)
+    }
+  }
+
   render() {
     const { dataSpecialty } = this.state
 
@@ -77,7 +85,11 @@ class Specialty extends Component {
                 dataSpecialty.length > 0 &&
                 dataSpecialty.map((item, index) => {
                   return (
-                    <div className={styles.itemSilder}>
+                    <div
+                      className={styles.itemSilder}
+                      key={index}
+                      onClick={() => this.handleViewDetailSpecialty(item)}
+                    >
                       <div
                         className={styles.coverItem}
                         style={{ backgroundImage: `url(${item.image})` }}
@@ -94,4 +106,10 @@ class Specialty extends Component {
   }
 }
 
-export default Specialty
+const mapStateToProps = (state) => ({})
+
+const mapDispatchToProps = {}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Specialty)
+)
