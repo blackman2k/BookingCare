@@ -155,7 +155,6 @@ const getDetailDoctorById = (id) => {
           errMessage: "Missing required parameters ",
         })
       } else {
-        console.log("vao else")
         let data = await db.User.findOne({
           where: {
             id: id,
@@ -270,7 +269,6 @@ const getScheduleByDate = (doctorId, date) => {
           errMessage: "Missing required parameters",
         })
       } else {
-        console.log("Date: ", date)
         let dataSchedule = await db.Schedule.findAll({
           where: {
             doctorId: doctorId,

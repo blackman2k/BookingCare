@@ -8,7 +8,6 @@ const getTopDoctorHome = async (req, res) => {
     let response = await doctorService.getTopDoctorHome(+limit)
     return res.status(200).json(response)
   } catch (e) {
-    console.log(e)
     return res.status(200).json({
       errCode: -1,
       message: "Error from server...",
@@ -19,10 +18,8 @@ const getTopDoctorHome = async (req, res) => {
 const getAllDoctors = async (req, res) => {
   try {
     let result = await doctorService.getAllDoctors()
-    console.log(result)
     return res.status(200).json(result)
   } catch (e) {
-    console.log(e)
     return res.status(200).json({
       errCode: -1,
       errMessage: "Error from the server",
@@ -59,7 +56,6 @@ const bulkCreateSchedule = async (req, res) => {
     let infor = await doctorService.bulkCreateSchedule(req.body)
     return res.status(200).json(infor)
   } catch (error) {
-    console.log(error)
     return res.status(200).json({
       errCode: -1,
       errMessage: "Error from the server",

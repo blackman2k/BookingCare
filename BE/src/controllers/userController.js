@@ -33,7 +33,6 @@ const handleLogin = async (req, res) => {
 
 const handleGetAllUsers = async (req, res) => {
   let id = req.query.id //ALL, id
-  console.log("Req: ", req)
 
   if (!id) {
     return res.status(200).json({

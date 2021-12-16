@@ -89,7 +89,6 @@ const findUserByEmail = (userEmail) => {
 
 const getAllUsers = (userID) => {
   return new Promise(async (resole, reject) => {
-    console.log("userID: ", userID)
     try {
       let users = ""
       if (userID === "ALL") {
@@ -107,7 +106,6 @@ const getAllUsers = (userID) => {
           },
         })
       }
-      console.log("User: ", users)
       resole(users)
     } catch (e) {
       reject(e)

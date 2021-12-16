@@ -22,6 +22,7 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         listGenders: action.data,
+        genders: action.data,
         isLoadingGender: false,
       }
     case actionTypes.FETCH_GENDER_FAILED:
