@@ -87,6 +87,10 @@ export const getAllDetailSpecialtyById = (data) => {
   )
 }
 
+export const createNewClinic = (data) => {
+  return axios.post("/api/create-new-clinic", data)
+}
+
 const userService = {
   handleLogin,
   getAllUsers,
@@ -106,6 +110,7 @@ const userService = {
   createNewSpecialty,
   getAllSpecialty,
   getAllDetailSpecialtyById,
+  createNewClinic,
 }
 
 export default userService

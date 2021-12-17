@@ -1,0 +1,17 @@
+.doctorItem {
+  display: flex;
+  border: 1px solid #dcdde1;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 20px;
+
+  .profileDoctor {
+    flex: 4;
+    padding-right: 20px;
+  }
+  .doctorExtraInfor {
+    flex: 6;
+    padding-left: 20px;
+    border-left: 1px solid #999;
+  }
+}
