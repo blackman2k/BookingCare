@@ -70,7 +70,7 @@ const checkRequiredFields = (inputData) => {
     "action",
     "selectedPrice",
     "selectedPayment",
-    "selectProvince",
+    "selectedProvince",
     "nameClinic",
     "addressClinic",
     "note",
@@ -97,6 +97,7 @@ const saveDetailInforDoctor = (inputData) => {
     try {
       let checkObj = checkRequiredFields(inputData)
       if (checkObj.isValid === false) {
+        console.log(inputData)
         resolve({
           errCode: 1,
           errMessage: `Missing parameters: ${checkObj.element}`,
@@ -138,7 +139,7 @@ const saveDetailInforDoctor = (inputData) => {
           doctorInfor.doctorId = inputData.doctorId
           doctorInfor.priceId = inputData.selectedPrice
           doctorInfor.paymentId = inputData.selectedPayment
-          doctorInfor.provinceId = inputData.selectProvince
+          doctorInfor.provinceId = inputData.selectedProvince
           doctorInfor.nameClinic = inputData.nameClinic
           doctorInfor.addressClinic = inputData.addressClinic
           doctorInfor.note = inputData.note
@@ -152,7 +153,7 @@ const saveDetailInforDoctor = (inputData) => {
             doctorId: inputData.doctorId,
             priceId: inputData.selectedPrice,
             paymentId: inputData.selectedPayment,
-            provinceId: inputData.selectProvince,
+            provinceId: inputData.selectedProvince,
             nameClinic: inputData.nameClinic,
             addressClinic: inputData.addressClinic,
             note: inputData.note,
@@ -238,6 +239,7 @@ const getDetailDoctorById = (id) => {
         })
       }
     } catch (error) {
+      console.log(error)
       reject(error)
     }
   })
