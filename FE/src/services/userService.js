@@ -104,6 +104,10 @@ export const getAllDetailClinicById = (data) => {
   return axios.get(`/api/get-detail-clinic-by-id?id=${data.id}`)
 }
 
+export const postSendRemedy = (data) => {
+  return axios.post("/api/send-remedy", data)
+}
+
 const userService = {
   handleLogin,
   getAllUsers,
@@ -127,6 +131,7 @@ const userService = {
   getAllClinic,
   getAllDetailClinicById,
   getAllPatientForDoctor,
+  postSendRemedy,
 }
 
 export default userService

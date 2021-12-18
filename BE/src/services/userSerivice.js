@@ -249,6 +249,8 @@ const getAllCodeService = async (typeAllCode) => {
   })
 }
 
+const sendRemedy = (data) => {}
+
 const userService = {
   handleUserLogin,
   checkUserEmail,
@@ -257,6 +259,7 @@ const userService = {
   deleteUser,
   updateUserData,
   getAllCodeService,
+  sendRemedy,
 }
 
 export default userService

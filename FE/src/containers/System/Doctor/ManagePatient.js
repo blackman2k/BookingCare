@@ -5,8 +5,14 @@ import styles from "./ManagePatient.module.scss"
 import DatePicker from "../../../components/Input/DatePicker"
 import { Button, Col, Container, Form, Row, Table } from "react-bootstrap"
 import Select from "react-select"
-import { getAllPatientForDoctor } from "../../../services/userService"
+import {
+  getAllPatientForDoctor,
+  postSendRemedy,
+} from "../../../services/userService"
 import moment from "moment"
+import { LANGUAGES } from "../../../utils"
+import RemedyModal from "./RemedyModal"
+import { toast } from "react-toastify"
 
 export class ManagePatient extends Component {
   constructor(props) {
@@ -14,17 +20,20 @@ export class ManagePatient extends Component {
     this.state = {
       currentDate: moment(new Date()).startOf("day").valueOf(),
       dataPatient: [],
+      isOpenRemedyModal: false,
+      dataModal: {},
+      isShowLoading: false,
     }
   }
 
   async componentDidMount() {
+    this.getDataPatient()
+  }
+
+  getDataPatient = async () => {
     const { user } = this.props
     const { currentDate } = this.state
     const formatedDate = new Date(currentDate).getTime()
-    this.getDataPatient(user, formatedDate)
-  }
-
-  getDataPatient = async (user, formatedDate) => {
     let res = await getAllPatientForDoctor({
       doctorId: user.id,
       date: formatedDate,
@@ -41,21 +50,63 @@ export class ManagePatient extends Component {
       {
         currentDate: date[0],
       },
-      () => {
-        const { user } = this.props
-        const { currentDate } = this.state
-        let formatedDate = new Date(currentDate).getTime()
-        this.getDataPatient(user, formatedDate)
+      async () => {
+        await this.getDataPatient()
       }
     )
   }
 
-  handleBtnConfirm = () => {}
+  handleBtnConfirm = (item) => {
+    let data = {
+      doctorId: item.doctorId,
+      patientId: item.patientId,
+      email: item.patientData.email,
+      timeType: item.timeType,
+      patientName: item.patientData.firstName,
+    }
+    this.setState({
+      isOpenRemedyModal: true,
+      dataModal: data,
+    })
+  }
+  closeRemedyModal = () => {
+    this.setState({
+      isOpenRemedyModal: false,
+      dataModal: {},
+    })
+  }
+
+  sendRemedy = async (dataChild) => {
+    const { dataModal } = this.state
+    this.setState({
+      isShowLoading: true,
+    })
+
+    let res = await postSendRemedy({
+      email: dataChild.email,
+      imgBase64: dataChild.imgBase64,
+      doctorId: dataModal.doctorId,
+      patientId: dataModal.patientId,
+      timeType: dataModal.timeType,
+      language: this.props.language,
+      patientName: dataModal.patientName,
+    })
+
+    if (res && res.errCode === 0) {
+      toast.success("Send remedy succeeds!")
+      this.closeRemedyModal()
+      await this.getDataPatient()
+    } else {
+      toast.error("Something wrongs...")
+      console.log("Something wrongs...", res)
+    }
+  }
 
   handleBtnRemedy = () => {}
 
   render() {
-    const { dataPatient } = this.state
+    const { dataPatient, isOpenRemedyModal, dataModal } = this.state
+    const { language } = this.props
     return (
       <div className={styles.managePatientContainer}>
         <Container>
@@ -87,6 +138,14 @@ export class ManagePatient extends Component {
               <tbody>
                 {dataPatient && dataPatient.length > 0 ? (
                   dataPatient.map((item, index) => {
+                    let time =
+                      language === LANGUAGES.VI
+                        ? item.timeTypeDataPatient.valueVi
+                        : item.timeTypeDataPatient.valueEn
+                    let gender =
+                      language === LANGUAGES.VI
+                        ? item.patientData.genderData.valueVi
+                        : item.patientData.genderData.valueEn
                     return (
                       <tr key={index}>
                         <td>{index + 1}</td>
@@ -97,16 +156,9 @@ export class ManagePatient extends Component {
                         <td>
                           <Button
                             variant="primary"
-                            onClick={this.handleBtnConfirm}
-                            className="mx-1"
+                            onClick={() => this.handleBtnConfirm(item)}
                           >
                             Xác nhận
-                          </Button>
-                          <Button
-                            variant="warning"
-                            onClick={this.handleBtnRemedy}
-                          >
-                            Gửi hóa đơn
                           </Button>
                         </td>
                       </tr>
@@ -114,13 +166,20 @@ export class ManagePatient extends Component {
                   })
                 ) : (
                   <tr>
-                    <td>Bill Gates</td>
-                    <td>555577754</td>
+                    <td colSpan={6} style={{ textAlign: "center" }}>
+                      No data
+                    </td>
                   </tr>
                 )}
               </tbody>
             </Table>
           </div>
+          <RemedyModal
+            isOpenModal={isOpenRemedyModal}
+            dataModal={dataModal}
+            closeRemedyModal={this.closeRemedyModal}
+            sendRemedy={this.sendRemedy}
+          />
         </Container>
       </div>
     )
