@@ -66,6 +66,11 @@ export const getExtraInforDoctorById = (doctorId) => {
 export const getProfileDoctorById = (doctorId) => {
   return axios.get(`/api/get-profile-doctor-by-id?doctorId=${doctorId}`)
 }
+export const getAllPatientForDoctor = (data) => {
+  return axios.get(
+    `/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`
+  )
+}
 
 export const postPatientBookAppointment = (data) => {
   return axios.post("/api/patient-book-appointment", data)
@@ -121,6 +126,7 @@ const userService = {
   createNewClinic,
   getAllClinic,
   getAllDetailClinicById,
+  getAllPatientForDoctor,
 }
 
 export default userService

@@ -36,6 +36,7 @@ const handleUserLogin = (email, password) => {
             roleId: userResult.roleId,
             firstName: userResult.firstName,
             lastName: userResult.lastName,
+            id: userResult.id,
           }
         } else {
           output.errCode = 2

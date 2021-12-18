@@ -462,7 +462,7 @@ const getListPatientForDoctor = (doctorId, date) => {
           where: {
             statusId: "S2",
             doctorId: doctorId,
-            date: data,
+            date: date,
           },
           include: [
             {
@@ -477,6 +477,11 @@ const getListPatientForDoctor = (doctorId, date) => {
                 },
               ],
             },
+            {
+              model: db.Allcode,
+              as: "timeTypeDataPatient",
+              attributes: ["valueEn", "valueVi"],
+            },
           ],
           raw: false,
           nest: true,
@@ -488,6 +493,7 @@ const getListPatientForDoctor = (doctorId, date) => {
         })
       }
     } catch (error) {
+      console.log("error: ", error)
       reject(error)
     }
   })
