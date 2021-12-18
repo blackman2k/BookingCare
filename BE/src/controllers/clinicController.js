@@ -13,9 +13,9 @@ const createClinic = async (req, res) => {
   }
 }
 
-const getAllSpecialty = async (req, res) => {
+const getAllClinic = async (req, res) => {
   try {
-    let infor = await specialtyService.getAllSpecialty()
+    let infor = await clinicService.getAllClinic()
     return res.status(200).json(infor)
   } catch (error) {
     console.log(error)
@@ -25,12 +25,9 @@ const getAllSpecialty = async (req, res) => {
     })
   }
 }
-const getDetailSpecialtyById = async (req, res) => {
+const getDetailClinicById = async (req, res) => {
   try {
-    let infor = await specialtyService.getDetailSpecialtyById(
-      req.query.id,
-      req.query.location
-    )
+    let infor = await clinicService.getDetailClinicById(req.query.id)
     return res.status(200).json(infor)
   } catch (error) {
     console.log(error)
@@ -43,6 +40,6 @@ const getDetailSpecialtyById = async (req, res) => {
 
 module.exports = {
   createClinic,
-  getAllSpecialty,
-  getDetailSpecialtyById,
+  getAllClinic,
+  getDetailClinicById,
 }

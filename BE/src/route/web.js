@@ -66,11 +66,11 @@ const initWebRoutes = (app) => {
   )
 
   router.post("/api/create-new-clinic", clinicControler.createClinic)
-  // router.get("/api/get-specialty", specialtyController.getAllSpecialty)
-  // router.get(
-  //   "/api/get-detail-specialty-by-id",
-  //   specialtyController.getDetailSpecialtyById
-  // )
+  router.get("/api/get-clinic", clinicControler.getAllClinic)
+  router.get(
+    "/api/get-detail-clinic-by-id",
+    clinicControler.getDetailClinicById
+  )
 
   return app.use("/", router)
 }

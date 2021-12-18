@@ -33,10 +33,10 @@ const createClinic = (data) => {
     }
   })
 }
-const getAllSpecialty = (data) => {
+const getAllClinic = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let data = await db.Specialty.findAll({})
+      let data = await db.Clinic.findAll({})
 
       if (data && data.length > 0) {
         data = data.map((item) => {
@@ -55,50 +55,39 @@ const getAllSpecialty = (data) => {
     }
   })
 }
-const getDetailSpecialtyById = (inputId, location) => {
+const getDetailClinicById = (inputId) => {
   return new Promise(async (resolve, reject) => {
     try {
-      if (!inputId || !location) {
+      if (!inputId) {
         resolve({
           errCode: 1,
           errMessage: "Missing parameter",
           data: {},
         })
       } else {
-        console.log("inputID", inputId, "--", location)
-        let data = await db.Specialty.findOne({
+        let data = await db.Clinic.findOne({
           where: {
             id: inputId,
           },
-          attributes: ["descriptionHTML", "descriptionMarkdown"],
+          attributes: [
+            "name",
+            "address",
+            "descriptionHTML",
+            "descriptionMarkdown",
+          ],
           raw: true,
         })
         console.log("Data: ", data)
 
         if (data) {
-          let doctorSpecialty = []
-          if (location === "ALL") {
-            doctorSpecialty = await db.Doctor_Infor.findAll({
-              where: { specialtyId: inputId },
-              attributes: ["doctorId", "provinceId"],
-              raw: true,
-            })
-            console.log("Time tat ca: ", doctorSpecialty)
-          } else {
-            doctorSpecialty = await db.Doctor_Infor.findAll({
-              where: {
-                specialtyId: inputId,
-                provinceId: location,
-              },
-              attributes: ["doctorId", "provinceId"],
-              raw: true,
-            })
-            console.log("Time : ", doctorSpecialty)
-          }
-          data.doctorSpecialty = doctorSpecialty
+          let doctorClinic = []
+          doctorClinic = await db.Doctor_Infor.findAll({
+            where: { clinicId: inputId },
+            attributes: ["doctorId", "provinceId"],
+            raw: true,
+          })
+          data.doctorClinic = doctorClinic
         }
-
-        console.log("Data truyen: ", data)
         resolve({
           errCode: 0,
           errMessage: "OK",
@@ -113,6 +102,6 @@ const getDetailSpecialtyById = (inputId, location) => {
 
 module.exports = {
   createClinic,
-  getAllSpecialty,
-  getDetailSpecialtyById,
+  getAllClinic,
+  getDetailClinicById,
 }

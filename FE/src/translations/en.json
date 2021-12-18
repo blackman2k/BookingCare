@@ -111,7 +111,8 @@
       "addressClinic": "Clinic's address",
       "note": "Note",
       "specialty": "Specialty",
-      "select-clinic": "Clinic"
+      "select-clinic": "Clinic",
+      "clinic": "Clinic"
     }
   }
 }
