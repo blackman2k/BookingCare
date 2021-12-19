@@ -8,6 +8,9 @@ import { times } from "lodash"
 
 import { userService } from "../../services"
 import { userLoginSuccess } from "../../store/actions"
+import { withRouter } from "react-router"
+import { path } from "../../utils"
+import { Button } from "react-bootstrap"
 
 class Login extends Component {
   constructor(props) {
@@ -46,7 +49,16 @@ class Login extends Component {
         })
       }
       if (result && result.errCode === 0) {
+        console.log("Dang nhap thanh cong: ", result)
         this.props.userLoginSuccess(result.data)
+        if(result.data && result.data.roleId) {
+          if(result.data.roleId === 'R1') {
+            this.props.history.push(path.SYSTEM)
+          }
+          if(result.data.roleId === 'R2') {
+            this.props.history.push('/doctor/manage-schedule')
+          }
+        }
       }
     } catch (e) {
       this.setState({
@@ -128,9 +140,9 @@ class Login extends Component {
           </form>
         </div>
         <div className="login-options">
-          <p>
-            Forgot your password? <a>Reset password</a>
-          </p>
+          <Button variant="outline-secondary" size="lg" onClick={() => this.props.history.push('/')}>
+            Anonymous login
+          </Button>
 
           {/* <div className="social-login">
                         <p>Or sign up with</p>
@@ -163,4 +175,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))

@@ -175,7 +175,7 @@ function UserRedux(props) {
 
   return (
     <div className={(styles.userRedux, "container")}>
-      <h2 className="title text-center">
+      <h2 className="title text-center mt-3">
         <FormattedMessage id="user-manage.title" />
       </h2>
       <h4>
@@ -300,29 +300,6 @@ function UserRedux(props) {
             </Form.Group>
             <Form.Group as={Col}>
               <Form.Label>
-                <FormattedMessage id="user-manage.position" />
-              </Form.Label>
-              <Form.Select
-                id="position"
-                name="position"
-                value={formData?.position}
-                onChange={(e) => {
-                  handleOnChangeInput(e, "position")
-                }}
-              >
-                {listPositions &&
-                  listPositions.length > 0 &&
-                  listPositions.map((item, index) => {
-                    return (
-                      <option key={index} value={item.keyMap}>
-                        {LANGUAGES === "vi" ? item.valueVi : item.valueEn}
-                      </option>
-                    )
-                  })}
-              </Form.Select>
-            </Form.Group>
-            <Form.Group as={Col}>
-              <Form.Label>
                 <FormattedMessage id="user-manage.role" />
               </Form.Label>
               <Form.Select
@@ -344,6 +321,31 @@ function UserRedux(props) {
                   })}
               </Form.Select>
             </Form.Group>
+            <Form.Group as={Col}>
+              <Form.Label>
+                <FormattedMessage id="user-manage.position" />
+              </Form.Label>
+              <Form.Select
+                id="position"
+                name="position"
+                value={formData?.position}
+                onChange={(e) => {
+                  handleOnChangeInput(e, "position")
+                }}
+                disabled={formData.role!=='R2'}
+              >
+                {listPositions &&
+                  listPositions.length > 0 &&
+                  listPositions.map((item, index) => {
+                    return (
+                      <option key={index} value={item.keyMap}>
+                        {LANGUAGES === "vi" ? item.valueVi : item.valueEn}
+                      </option>
+                    )
+                  })}
+              </Form.Select>
+            </Form.Group>
+            
           </Row>
           <Row className={clsx(styles.uploadAva, "mb-3")}>
             <Form.Group className="position-relative mb-3">

@@ -64,6 +64,9 @@ export class MangeSchedule extends Component {
   }
 
   handleSaveShedult = async () => {
+    
+
+
     const { rangeTime, selectedDoctor, currentDate } = this.state
     let result = []
 
@@ -71,10 +74,14 @@ export class MangeSchedule extends Component {
       toast.error("Invalid date!")
       return
     }
-    if (selectedDoctor && _.isEmpty(selectedDoctor)) {
-      toast.error("Invalid selected doctor!")
-      return
-    }
+
+    if(this.props.userInfo?.roleId !== 'R2') {
+      if (selectedDoctor && _.isEmpty(selectedDoctor)) {
+        toast.error("Invalid selected doctor!")
+        return
+      }
+    } 
+    
 
     let formatedDate = new Date(currentDate).getTime()
 
@@ -83,7 +90,11 @@ export class MangeSchedule extends Component {
       if (selectedTime && selectedTime.length > 0) {
         selectedTime.forEach((schedule, index) => {
           let object = {}
-          object.doctorId = selectedDoctor.value
+          if(this.props.userInfo?.roleId === 'R2') {
+            object.doctorId = this.props?.userInfo?.id
+          } else {
+            object.doctorId = selectedDoctor.value
+          }
           object.date = formatedDate
           object.timeType = schedule.keyMap
           result.push(object)
@@ -95,7 +106,7 @@ export class MangeSchedule extends Component {
     }
     let res = await userService.saveBulkScheduleDoctor({
       arrSchedule: result,
-      doctorId: selectedDoctor.value,
+      doctorId: this.props.userInfo?.roleId === 'R2' ?  this.props.userInfo.id : selectedDoctor.value,
       formatedDate: formatedDate,
     })
 
@@ -134,7 +145,8 @@ export class MangeSchedule extends Component {
 
   render() {
     const { rangeTime } = this.state
-    const { language } = this.props
+    const { language, userInfo } = this.props
+    console.log("Props: ", this.props)
     let yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
     return (
       <div className="container">
@@ -142,7 +154,9 @@ export class MangeSchedule extends Component {
           <FormattedMessage id="manage-schedule.title" />
         </h2>
         <Row>
-          <Col>
+          {
+            userInfo.roleId === 'R1' &&
+            <Col>
             <Form.Label>
               <FormattedMessage id="manage-schedule.choose-doctor" />
             </Form.Label>
@@ -152,8 +166,8 @@ export class MangeSchedule extends Component {
               options={this.state.allDoctors}
               className={styles.selectDoctor}
             />
-          </Col>
-          <Col>
+          </Col>}
+          <Col md={6}>
             <Form.Label>
               <FormattedMessage id="manage-schedule.choose-date" />
             </Form.Label>
@@ -195,6 +209,7 @@ const mapStateToProps = (state) => ({
   language: state.app.language,
   allDoctors: state.admin.allDoctors,
   allScheduleTime: state.admin.allScheduleTime,
+  userInfo : state.user.userInfo
 })
 
 const mapDispatchToProps = (dispatch) => {

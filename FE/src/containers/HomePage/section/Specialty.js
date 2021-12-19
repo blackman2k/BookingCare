@@ -75,9 +75,9 @@ class Specialty extends Component {
             <h3 className={styles.titleHeader}>
               <FormattedMessage id="homepage.specialty-poplular" />
             </h3>
-            <button className={styles.btnMoreInfo}>
+            {/* <button className={styles.btnMoreInfo}>
               <FormattedMessage id="homepage.more-infor" />
-            </button>
+            </button> */}
           </div>
           <div className={styles.bodySection}>
             <Slider {...settings}>

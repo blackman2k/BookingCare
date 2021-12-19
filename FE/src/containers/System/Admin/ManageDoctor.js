@@ -322,7 +322,7 @@ class ManageDoctor extends Component {
             </div>
           </div>
         </header>
-        <Row>
+        <Row className="mb-3">
           <Col>
             <Form.Group>
               <Form.Label>
@@ -375,7 +375,7 @@ class ManageDoctor extends Component {
             </Form.Group>
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-3">
           <Col>
             <Form.Group>
               <Form.Label>
@@ -414,7 +414,7 @@ class ManageDoctor extends Component {
             </Form.Group>
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-3">
           <Col>
             <Form.Group>
               <Form.Label>

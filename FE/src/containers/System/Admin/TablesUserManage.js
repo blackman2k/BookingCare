@@ -21,6 +21,15 @@ function TableUserManage(props) {
     setUsers(props.users)
   }, [props.users])
 
+  const handleClickDelete = (e, item) => {
+    if(item.roleId !== 'R1') {
+      if (window.confirm("Xác nhận xóa người dùng!") == true) {
+        props.deleteUser(item.id)
+      }
+    } else {
+      alert("Bạn không thể xóa quản trị viên!")
+    }
+  }
   return (
     <Table striped bordered hover className="mb-4">
       <thead>
@@ -52,7 +61,8 @@ function TableUserManage(props) {
                   <Button
                     variant="danger"
                     onClick={(e) => {
-                      props.deleteUser(item.id)
+                      // props.deleteUser(item.id)
+                      handleClickDelete(e, item)
                     }}
                   >
                     <i className="fas fa-trash"></i>

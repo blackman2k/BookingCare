@@ -94,9 +94,6 @@ class OutStandingDotor extends Component {
             <h3 className={styles.titleHeader}>
               <FormattedMessage id="homepage.outstanding-doctor" />
             </h3>
-            <button className={styles.btnMoreInfo}>
-              <FormattedMessage id="homepage.more-infor" />
-            </button>
           </div>
           <div className={styles.bodySection}>
             <Slider {...settings}>

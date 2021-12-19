@@ -108,6 +108,10 @@ export const postSendRemedy = (data) => {
   return axios.post("/api/send-remedy", data)
 }
 
+export const search = (text) => {
+  return axios.get(`/api/search?text=${text}`)
+}
+
 const userService = {
   handleLogin,
   getAllUsers,
@@ -132,6 +136,7 @@ const userService = {
   getAllDetailClinicById,
   getAllPatientForDoctor,
   postSendRemedy,
+  search
 }
 
 export default userService
