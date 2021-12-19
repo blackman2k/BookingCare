@@ -54,11 +54,8 @@ function UserManage() {
       if (res && res.errCode === 0) {
         await getAllUsers()
       } else {
-        console.log(res.errMessage)
       }
-    } catch (e) {
-      console.log(e)
-    }
+    } catch (e) {}
   }
 
   const handleEditUser = async (user) => {
@@ -73,7 +70,6 @@ function UserManage() {
         setIsOpenModalUser(false)
         // emitter.emit("EVENT_CLEAR_MODAL_DATA");
       } else {
-        console.log("Update that bai")
       }
     })
   }

@@ -69,7 +69,7 @@ class Specialty extends Component {
       prevArrow: <SamplePrevArrow />,
     }
     return (
-      <div className={clsx(styles.sectionsHomePage)}>
+      <div className={clsx(styles.sectionsHomePage)} id="specialties">
         <Container>
           <div className={styles.headerSection}>
             <h3 className={styles.titleHeader}>

@@ -10,6 +10,7 @@ import { withRouter } from "react-router"
 import * as actions from "../../../store/actions"
 import { connect } from "react-redux"
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider"
+import { FormattedMessage } from "react-intl"
 
 function SampleNextArrow(props) {
   const { onClick } = props
@@ -80,11 +81,22 @@ class OutStandingDotor extends Component {
       .concat(arrDoctors)
 
     return (
-      <div className={clsx(styles.sectionsHomePage, styles.outStandingDoctor)}>
+      <div
+        className={clsx(
+          styles.sectionsHomePage,
+          styles.outStandingDoctor,
+          "mt-header-section"
+        )}
+        id="doctors"
+      >
         <Container>
           <div className={styles.headerSection}>
-            <h3 className={styles.titleHeader}>Bác sĩ nổi bật tuần qua</h3>
-            <button className={styles.btnMoreInfo}>XEM THÊM</button>
+            <h3 className={styles.titleHeader}>
+              <FormattedMessage id="homepage.outstanding-doctor" />
+            </h3>
+            <button className={styles.btnMoreInfo}>
+              <FormattedMessage id="homepage.more-infor" />
+            </button>
           </div>
           <div className={styles.bodySection}>
             <Slider {...settings}>

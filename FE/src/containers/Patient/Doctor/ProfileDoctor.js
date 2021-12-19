@@ -79,7 +79,6 @@ export class ProfileDoctor extends Component {
       isShowLinkDetail,
       doctorId,
     } = this.props
-    console.log("Dataprofile: ", dataProfile)
 
     let nameVi = "",
       nameEn = ""

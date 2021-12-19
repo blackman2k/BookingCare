@@ -100,7 +100,6 @@ export class DoctorSchedule extends Component {
       let doctorId = this.props.doctorIdFromParent
       let date = event.target.value
       let res = await userService.getScheduleDoctorByDate(doctorId, date)
-      console.log("Check respon schedule: ", res)
       if (res && res.errCode === 0) {
         this.setState({
           allAvalableTime: res.data ? res.data : [],

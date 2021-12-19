@@ -14,6 +14,7 @@ import {
 } from "../../../services/userService"
 import _ from "lodash"
 import { LANGUAGES } from "../../../utils"
+import HeaderSection from "../../Common/HeaderSection"
 
 export class DetailClinic extends Component {
   constructor(props) {
@@ -56,17 +57,16 @@ export class DetailClinic extends Component {
 
   render() {
     const { arrDoctorId, dataDetailClinic } = this.state
-    console.log("arrDoctorId: ", arrDoctorId)
 
     const { language } = this.props
     return (
       <div>
-        <Header />
-        <Container className="mt-header">
+        <HeaderSection titleHeader={dataDetailClinic.name} />
+        <Container className="mt-header-section">
           <div className={styles.descriptionClinic}>
             {dataDetailClinic && !_.isEmpty(dataDetailClinic) && (
               <>
-                <h2 className={clsx(styles.nameClinic, "text-center", "mt-4")}>
+                <h2 className={clsx(styles.nameClinic, "mt-4")}>
                   {dataDetailClinic.name}
                 </h2>
                 <div

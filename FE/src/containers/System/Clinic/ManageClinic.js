@@ -27,7 +27,6 @@ export class ManageClinic extends Component {
   handleOnChangeInput = (event, id) => {
     let stateCopy = { ...this.state }
     stateCopy[id] = event.target.value
-    console.log("Value: ", stateCopy)
     this.setState({
       ...stateCopy,
     })

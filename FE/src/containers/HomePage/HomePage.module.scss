@@ -36,18 +36,27 @@
         }
       }
       .headerList {
-        flex: 2.5 1;
+        flex: 2 1;
         height: $height-header;
         display: flex;
         justify-content: space-between;
         align-items: center;
         .headerItemList {
+          display: block;
+          text-decoration: none;
           p {
             margin: 0;
             color: $text-color;
           }
           p:last-child {
             font-size: 12px;
+          }
+          &:hover {
+            transform: scale(0.98);
+            cursor: pointer;
+            p {
+              color: #3dc1d3;
+            }
           }
         }
       }

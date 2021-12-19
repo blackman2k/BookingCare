@@ -11,14 +11,13 @@ import HandBook from "./section/HandBook"
 import Footer from "../../components/Footer/Footer"
 
 function HomePage() {
-  console.log(styles)
   return (
     <div className={styles.homePage}>
       <Header isShowBanner={true} />
       <Specialty />
       <MedicalFacility />
       <OutStandingDotor />
-      <HandBook />
+      {/* <HandBook /> */}
       <Footer />
     </div>
   )

@@ -14,6 +14,7 @@ import {
 } from "../../../services/userService"
 import _ from "lodash"
 import { LANGUAGES } from "../../../utils"
+import HeaderSection from "../../Common/HeaderSection"
 
 export class DetailSpecialty extends Component {
   constructor(props) {
@@ -39,7 +40,6 @@ export class DetailSpecialty extends Component {
 
       let resProvince = await getAllCodeService("PROVINCE")
 
-      console.log("Res: ", res, "---", resProvince)
       if (res && res.errCode === 0 && resProvince.errCode === 0) {
         let data = res.data
         let arrDoctorId = []
@@ -107,12 +107,11 @@ export class DetailSpecialty extends Component {
 
   render() {
     const { arrDoctorId, dataDetailSpecialty, listProvince } = this.state
-    console.log("arrDoctorId: ", arrDoctorId)
 
     const { language } = this.props
     return (
       <div>
-        <Header />
+        <HeaderSection titleHeader={dataDetailSpecialty?.name} />
         <Container className="mt-header">
           <div className={styles.descriptionSpecialty}>
             {dataDetailSpecialty && !_.isEmpty(dataDetailSpecialty) && (

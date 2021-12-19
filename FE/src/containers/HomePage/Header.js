@@ -2,7 +2,7 @@ import logo from "../../assets/images/hospital.svg"
 import styles from "./HomePage.module.scss"
 import clsx from "clsx"
 import { isClassExpression } from "typescript"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { FormattedMessage } from "react-intl"
 import { changeLanguage } from "../../store/actions"
 import { dispatch } from "../../redux"
@@ -17,7 +17,6 @@ function Header(props) {
   }
 
   const handleCickLogo = (e) => {
-    console.log(props)
     props.history.push("/home")
   }
 
@@ -26,14 +25,13 @@ function Header(props) {
       <div className={styles.navbar}>
         <div className={clsx(styles.headerWrapper, "container")}>
           <div className={clsx(styles.headerLogo)}>
-            <i className="fas fa-bars"></i>
             <div
               className={styles.headerLogoImage}
               onClick={handleCickLogo}
             ></div>
           </div>
           <div className={clsx(styles.headerList)}>
-            <div className={styles.headerItemList}>
+            <a className={styles.headerItemList} href="#specialties">
               <p>
                 <b>
                   <FormattedMessage id="header.speciality" />
@@ -42,8 +40,8 @@ function Header(props) {
               <p className={styles.headerSubtitle}>
                 <FormattedMessage id="header.searchdoctor" />
               </p>
-            </div>
-            <div className={styles.headerItemList}>
+            </a>
+            <a className={styles.headerItemList} href="#clinics">
               <p>
                 <b>
                   <FormattedMessage id="header.health-facility" />
@@ -52,8 +50,8 @@ function Header(props) {
               <p>
                 <FormattedMessage id="header.select-room" />
               </p>
-            </div>
-            <div className={styles.headerItemList}>
+            </a>
+            <a className={styles.headerItemList} href="#doctors">
               <p>
                 <b>
                   <FormattedMessage id="header.doctor" />
@@ -62,8 +60,8 @@ function Header(props) {
               <p>
                 <FormattedMessage id="header.select-doctor" />
               </p>
-            </div>
-            <div className={styles.headerItemList}>
+            </a>
+            {/* <div className={styles.headerItemList}>
               <p>
                 <b>
                   <FormattedMessage id="header.fee" />
@@ -72,7 +70,7 @@ function Header(props) {
               <p>
                 <FormattedMessage id="header.check-health" />
               </p>
-            </div>
+            </div> */}
           </div>
           <div className={clsx(styles.headerRight)}>
             <i className="fas fa-question-circle"></i>
@@ -112,11 +110,18 @@ function Header(props) {
               </h2>
             </div>
             <div className={styles.search}>
-              <input type="text" placeholder="Nhập nội dung tìm kiếm" />
+              <input
+                type="text"
+                placeholder={
+                  props.language === LANGUAGES.VI
+                    ? "Tìm kiếm chuyên khoa/ bác sĩ/ cơ sở y tế"
+                    : "Search for a specialist/ doctor/ medical facility"
+                }
+              />
               <i className="fas fa-search"></i>
             </div>
             <div className={styles.listOptions}>
-              <div className={styles.optionItem}>
+              {/* <div className={styles.optionItem}>
                 <div className={styles.iconOptions}>
                   <i className="fas fa-hospital"></i>
                 </div>
@@ -163,7 +168,7 @@ function Header(props) {
                 <p className={styles.titleOptions}>
                   <FormattedMessage id="banner.option6" />
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

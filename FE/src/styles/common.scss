@@ -19,3 +19,6 @@
 .mt-header {
   margin-top: $height-header;
 }
+.mt-header-section {
+  margin-top: calc(#{$height-header-section} + 10px);
+}

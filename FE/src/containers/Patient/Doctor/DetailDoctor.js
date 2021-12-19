@@ -10,6 +10,7 @@ import { userService } from "../../../services"
 import Header from "../../HomePage/Header"
 import DoctorSchedule from "./DoctorSchedule"
 import DoctorExtraInfor from "./DoctorExtraInfor"
+import HeaderSection from "../../Common/HeaderSection"
 
 class DetailDoctor extends Component {
   constructor(props) {
@@ -31,7 +32,6 @@ class DetailDoctor extends Component {
         currentDoctorId: id,
       })
       let res = await userService.getDetailInforDoctor(id)
-      console.log(res)
       if (res && res.errCode === 0) {
         this.setState({
           detailDoctor: res.data,
@@ -53,7 +53,9 @@ class DetailDoctor extends Component {
     }
     return (
       <div className={styles.detailDoctor}>
-        <Header isShowBanner={false} />
+        <HeaderSection
+          titleHeader={`${detailDoctor.lastName} ${detailDoctor.firstName}`}
+        />
         <Container className="py-3">
           <header className={styles.header}>
             <div

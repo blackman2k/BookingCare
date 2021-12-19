@@ -16,7 +16,6 @@ const initFormData = {
 function ModalUser({ isOpen, createNewUser, toggle, userEdit, editUser }) {
   const [formData, setFormData] = useState(initFormData)
 
-  console.log(formData, userEdit)
   useEffect(() => {
     listenToEmitter()
     switchInputState()
@@ -44,7 +43,6 @@ function ModalUser({ isOpen, createNewUser, toggle, userEdit, editUser }) {
     if (!userEdit) {
       let isValid = checkValidateInput()
       if (isValid === true) {
-        console.log(formData)
       } else {
         alert("Missing parameters")
       }
@@ -57,7 +55,6 @@ function ModalUser({ isOpen, createNewUser, toggle, userEdit, editUser }) {
     let isValidate = true
     let arrInput = ["email", "password", "firstName", "lastName", "address"]
     for (let i = 0; i < arrInput.length; i++) {
-      console.log(formData[arrInput[i]])
       if (formData[arrInput[i]] === "") isValidate = false
     }
     return isValidate

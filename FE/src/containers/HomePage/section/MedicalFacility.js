@@ -6,6 +6,7 @@ import { Container } from "react-bootstrap"
 import { getAllClinic } from "../../../services/userService"
 import { withRouter } from "react-router"
 import { Component } from "react"
+import { FormattedMessage } from "react-intl"
 
 function SampleNextArrow(props) {
   const { onClick } = props
@@ -67,11 +68,22 @@ class MedicalFacility extends Component {
   render() {
     const { dataClinics } = this.state
     return (
-      <div className={clsx(styles.sectionsHomePage, styles.medicalFacility)}>
+      <div
+        className={clsx(
+          styles.sectionsHomePage,
+          styles.medicalFacility,
+          "mt-header-section"
+        )}
+        id="clinics"
+      >
         <Container>
           <div className={styles.headerSection}>
-            <h3 className={styles.titleHeader}>Cơ sở y tế nổi bật</h3>
-            <button className={styles.btnMoreInfo}>XEM THÊM</button>
+            <h3 className={styles.titleHeader}>
+              <FormattedMessage id="header.health-facility" />
+            </h3>
+            <button className={styles.btnMoreInfo}>
+              <FormattedMessage id="homepage.more-infor" />
+            </button>
           </div>
           <div className={styles.bodySection}>
             <Slider {...settings}>

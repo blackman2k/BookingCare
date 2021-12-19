@@ -47,7 +47,6 @@ class Login extends Component {
       }
       if (result && result.errCode === 0) {
         this.props.userLoginSuccess(result.data)
-        console.log("Login succesd")
       }
     } catch (e) {
       this.setState({

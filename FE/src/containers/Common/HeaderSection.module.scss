@@ -1,0 +1,47 @@
+@import "../../styles/_variables.scss";
+
+.headerContainer {
+  height: $height-header-section;
+  background-color: $primary-color;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+
+  .backHomeBtn {
+    width: 100px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+    i {
+      margin-right: 5px;
+      font-size: 15px;
+    }
+    &:hover {
+      cursor: pointer;
+      color: #dfe6e9;
+      i {
+        transform: translateX(-3px);
+      }
+    }
+  }
+  .titleHeader {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    p {
+      margin: 0;
+      text-transform: capitalize;
+    }
+  }
+}

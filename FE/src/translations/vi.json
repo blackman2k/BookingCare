@@ -23,7 +23,8 @@
   },
   "menu": {
     "admin": {
-      "manage-user": "Người dùng",
+      "manage-user": "Quản lý người dùng",
+      "user": "Người dùng",
       "manage-doctor": "Quản lý bác sĩ",
       "manage-admin": "Quản lý admin",
       "crud": "CRUD user",
@@ -59,9 +60,9 @@
     "upload": "Tải ảnh"
   },
   "homepage": {
-    "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
-    "more-infor": "Xem thêm",
-    "specialty-poplular": "Chuyên khoa phổ biến"
+    "outstanding-doctor": "Bác sĩ",
+    "more-infor": "XEM THÊM",
+    "specialty-poplular": "Chuyên khoa"
   },
   "manage-schedule": {
     "title": "Quản lý kế hoạch khám bệnh của bác sĩ",

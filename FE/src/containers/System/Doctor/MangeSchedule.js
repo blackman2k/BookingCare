@@ -104,8 +104,6 @@ export class MangeSchedule extends Component {
     } else {
       toast.error("Error save!")
     }
-
-    console.log("Result: ", result)
   }
 
   buildDataInputSelect = (inputData) => {

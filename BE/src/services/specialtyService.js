@@ -68,7 +68,7 @@ const getDetailSpecialtyById = (inputId, location) => {
           where: {
             id: inputId,
           },
-          attributes: ["descriptionHTML", "descriptionMarkdown"],
+          attributes: ["descriptionHTML", "descriptionMarkdown", "name"],
           raw: true,
         })
         console.log("Data: ", data)

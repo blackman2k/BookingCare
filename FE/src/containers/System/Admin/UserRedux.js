@@ -43,8 +43,6 @@ function UserRedux(props) {
     setLoading(true)
   }, [])
 
-  // console.log("Props thay doi: ", props)
-
   useEffect(() => {
     setListGender(props.listGenders)
     setLoading(false)
@@ -102,7 +100,6 @@ function UserRedux(props) {
     let result = validateFormData()
     if (result) {
       if (isEdit) {
-        console.log("Formdata: ", formData)
         props.saveUser(formData)
       } else {
         props.createNewUser(formData)
@@ -129,14 +126,12 @@ function UserRedux(props) {
   }
 
   const handleEditUser = (user) => {
-    console.log("Handle edit user, ", user)
     let userEdit = formatUserServiceToFormData(user)
     userEdit.id = user.id
     let imageBase64 = ""
     if (user.image) {
       imageBase64 = new Buffer(user.image, "base64").toString("binary")
     }
-    console.log("Image base 64: ", imageBase64)
     setPreviewAavUrl(imageBase64)
     setFormData(userEdit)
     setIsEdit(true)

@@ -105,7 +105,6 @@ export const fetchAllUserStart = () => {
     try {
       let res = await userService.getAllUsers("ALL")
       if (res && res.errCode === 0) {
-        console.log("Res: ", res)
         dispatch(fetchAllUserSuccess(res.data))
       } else {
         dispatch(fetchAllUserFailed(res.data))
@@ -201,7 +200,6 @@ export const fetchAllDoctors = () => {
   return async (dispatch) => {
     try {
       let res = await userService.getAllDoctors()
-      console.log("Res: ", res)
 
       if (res && res.errCode === 0) {
         dispatch({

@@ -98,7 +98,6 @@ export class ManagePatient extends Component {
       await this.getDataPatient()
     } else {
       toast.error("Something wrongs...")
-      console.log("Something wrongs...", res)
     }
   }
 
