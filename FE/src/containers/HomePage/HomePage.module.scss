@@ -75,6 +75,10 @@
           font-weight: 500;
           margin-left: 6px;
           color: $sub-text-color;
+          cursor: pointer;
+          &:hover {
+            color: $primary-color;
+          }
         }
         .languageOptions {
           font-size: 16px;
