@@ -74,6 +74,7 @@ const getDetailClinicById = (inputId) => {
             "address",
             "descriptionHTML",
             "descriptionMarkdown",
+            "image",
           ],
           raw: true,
         })
@@ -100,8 +101,61 @@ const getDetailClinicById = (inputId) => {
   })
 }
 
+const editClinic = (id, data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !data.name ||
+        !data.image ||
+        !data.address ||
+        !data.descriptionHTML ||
+        !data.descriptionMarkdown
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        })
+      } else {
+        let clinic = await db.Clinic.findOne({
+          where: {
+            id: id,
+          },
+          raw: false,
+        })
+        if (clinic) {
+          console.log("Clinic: ", clinic)
+          clinic.name = data.name
+          clinic.image = data.imageBase64
+          clinic.address = data.address
+          clinic.descriptionHTML = data.descriptionHTML
+          clinic.descriptionMarkdown = data.descriptionMarkdown
+
+          await clinic.save()
+        }
+
+        // await db.Clinic.create({
+        //   name: data.name,
+        //   image: data.imageBase64,
+        //   address: data.address,
+        //   descriptionHTML: data.descriptionHTML,
+        //   descriptionMarkdown: data.descriptionMarkdown,
+        // })
+        console.log("Clinic,", id, data)
+
+        resolve({
+          errCode: 0,
+          errMessage: "OK",
+        })
+      }
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
 module.exports = {
   createClinic,
   getAllClinic,
   getDetailClinicById,
+  editClinic,
 }

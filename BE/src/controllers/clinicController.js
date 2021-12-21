@@ -38,8 +38,22 @@ const getDetailClinicById = async (req, res) => {
   }
 }
 
+const editClinic = async (req, res) => {
+  try {
+    let infor = await clinicService.editClinic(req.query.id, req.body)
+    return res.status(200).json(infor)
+  } catch (error) {
+    console.log(error)
+    return res.status(200).json({
+      errCode: -1,
+      errMessage: "Error from the server",
+    })
+  }
+}
+
 module.exports = {
   createClinic,
   getAllClinic,
   getDetailClinicById,
+  editClinic,
 }

@@ -94,10 +94,11 @@ function Header(props) {
       <div className={styles.navbar}>
         <div className={clsx(styles.headerWrapper, "container")}>
           <div className={clsx(styles.headerLogo)}>
-            <div
+            <a
               className={styles.headerLogoImage}
               onClick={handleCickLogo}
-            ></div>
+              href="#header"
+            ></a>
           </div>
           <div className={clsx(styles.headerList)}>
             <a className={styles.headerItemList} href="#specialties">
@@ -186,7 +187,7 @@ function Header(props) {
         </div>
       </div>
       {props.isShowBanner && (
-        <div className={styles.bannerHomePage}>
+        <div className={styles.bannerHomePage} id="header">
           <div className={styles.content}>
             <div className={styles.title}>
               <h2>

@@ -62,12 +62,10 @@ const initWebRoutes = (app) => {
     "/api/verify-book-appointment",
     patientController.postVerifyBookAppointment
   )
-  router.get(
-    "/api/search",
-    patientController.getSearch
-  )
+  router.get("/api/search", patientController.getSearch)
 
   router.post("/api/create-new-specialty", specialtyController.createSpecialty)
+  router.put("/api/edit-specialty", specialtyController.editSpecialty)
   router.get("/api/get-specialty", specialtyController.getAllSpecialty)
   router.get(
     "/api/get-detail-specialty-by-id",
@@ -76,6 +74,7 @@ const initWebRoutes = (app) => {
 
   router.post("/api/create-new-clinic", clinicControler.createClinic)
   router.get("/api/get-clinic", clinicControler.getAllClinic)
+  router.put("/api/edit-clinic", clinicControler.editClinic)
   router.get(
     "/api/get-detail-clinic-by-id",
     clinicControler.getDetailClinicById

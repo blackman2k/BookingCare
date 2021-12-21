@@ -63,12 +63,16 @@ const getDetailSpecialtyById = (inputId, location) => {
           data: {},
         })
       } else {
-        console.log("inputID", inputId, "--", location)
         let data = await db.Specialty.findOne({
           where: {
             id: inputId,
           },
-          attributes: ["descriptionHTML", "descriptionMarkdown", "name"],
+          attributes: [
+            "descriptionHTML",
+            "descriptionMarkdown",
+            "name",
+            "image",
+          ],
           raw: true,
         })
         console.log("Data: ", data)
@@ -95,8 +99,6 @@ const getDetailSpecialtyById = (inputId, location) => {
           }
           data.doctorSpecialty = doctorSpecialty
         }
-
-        console.log("Data truyen: ", data)
         resolve({
           errCode: 0,
           errMessage: "OK",
@@ -109,8 +111,48 @@ const getDetailSpecialtyById = (inputId, location) => {
   })
 }
 
+const editSpecialty = (id, data) => {
+  console.log(id, data)
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (
+        !data.name ||
+        !data.image ||
+        !data.descriptionHTML ||
+        !data.descriptionMarkdown
+      ) {
+        resolve({
+          errCode: 1,
+          errMessage: "Missing parameter",
+        })
+      } else {
+        let specialty = await db.Specialty.findOne({
+          where: {
+            id: id,
+          },
+          raw: false,
+        })
+        console.log("Tim ra specialty: ", specialty)
+        specialty.image = data.image
+        specialty.name = data.name
+        specialty.descriptionHTML = data.descriptionHTML
+        specialty.descriptionMarkdown = data.descriptionMarkdown
+
+        await specialty.save()
+
+        resolve({
+          errCode: 0,
+          errMessage: "OK",
+        })
+      }
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
 module.exports = {
   createSpecialty,
   getAllSpecialty,
   getDetailSpecialtyById,
+  editSpecialty,
 }
