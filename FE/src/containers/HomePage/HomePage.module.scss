@@ -103,8 +103,8 @@
   }
   .bannerHomePage {
     height: calc(100vh - #{$height-header});
-    background: url("../../assets/images/bookingcare-cover-4.jpg") no-repeat
-      center center;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)),
+      center / cover no-repeat url("../../assets/images/banner.jpg");
     position: relative;
     margin-top: $height-header;
     .content {
@@ -120,9 +120,11 @@
         text-align: center;
         color: #fff;
         font-weight: 400;
+
         h2 {
           line-height: 50px;
           text-shadow: 1px 2px #333;
+          font-weight: 600;
         }
       }
       .search {
@@ -205,7 +207,7 @@
         display: flex;
         justify-content: center;
         background: linear-gradient(to top, #fff 60%, rgba(255, 255, 255, 0));
-        padding-bottom: 40px;
+        padding-bottom: 60px;
         gap: 40px;
         .optionItem {
           text-align: center;

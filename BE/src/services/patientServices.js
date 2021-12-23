@@ -27,16 +27,8 @@ const postBookAppointment = (data) => {
           errMessage: "Missing required parameters",
         })
       } else {
-        let token = uuidv4()
+        const token = uuidv4()
         console.log("Token: ", token)
-        await emailService.sendSimpleEmail({
-          reciverEmail: data.email,
-          patientName: data.fullName,
-          time: data.timeString,
-          doctorName: data.doctorName,
-          language: data.language,
-          redirectLink: buildUrlEmail(data.doctorId, token),
-        })
 
         //upsert patient
         let user = await db.User.findOrCreate({
@@ -55,7 +47,7 @@ const postBookAppointment = (data) => {
         //create a booking record
         if (user && user[0]) {
           await db.Booking.findOrCreate({
-            where: { patientId: user[0].id },
+            where: { patientId: user[0].id, timeType: data.timeType },
             defaults: {
               statusId: "S1",
               doctorId: data.doctorId,
@@ -67,6 +59,14 @@ const postBookAppointment = (data) => {
           })
         }
 
+        await emailService.sendSimpleEmail({
+          reciverEmail: data.email,
+          patientName: data.fullName,
+          time: data.timeString,
+          doctorName: data.doctorName,
+          language: data.language,
+          redirectLink: buildUrlEmail(data.doctorId, token),
+        })
         resolve({
           errCode: 0,
           errMessage: "Save infor patient succed!",

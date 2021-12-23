@@ -5,15 +5,13 @@ import { FormattedMessage } from "react-intl"
 import MdEditor from "react-markdown-editor-lite"
 import { CommonUtils } from "../../../utils"
 import {
-  createNewClinic,
   getAllClinic,
   getAllDetailClinicById,
-  editClinic,
   editSpecialty,
+  editClinic,
 } from "../../../services/userService"
 import { toast } from "react-toastify"
 import styles from "./ManageClinic.module.scss"
-import { divide } from "lodash"
 import clsx from "clsx"
 import { Button, Col, Row, Form } from "react-bootstrap"
 import Select from "react-select"
@@ -95,7 +93,15 @@ export class ManageClinic extends Component {
 
   handleSaveNewClinic = async () => {
     console.log(this.state.selectedOption)
-    let res = await editSpecialty(this.state.selectedOption.value, this.state)
+    const { name, image, address, descriptionHTML, descriptionMarkdown } =
+      this.state
+    let res = await editClinic(this.state.selectedOption.value, {
+      name: name,
+      address: address,
+      descriptionHTML: descriptionHTML,
+      descriptionMarkdown: descriptionMarkdown,
+      image: image,
+    })
     if (res && res.errCode === 0) {
       toast.success("Save clinic succeeds!")
       this.setState({

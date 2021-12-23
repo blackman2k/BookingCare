@@ -101,7 +101,7 @@ export const createNewClinic = (data) => {
 }
 
 export const editClinic = (id, data) => {
-  return axios.put(`/api/edit-clic?id=${id}`, data)
+  return axios.put(`/api/edit-clinic?id=${id}`, data)
 }
 
 export const getAllClinic = () => {

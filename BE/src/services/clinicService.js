@@ -40,7 +40,7 @@ const getAllClinic = (data) => {
 
       if (data && data.length > 0) {
         data = data.map((item) => {
-          item.image = new Buffer(item.image, "base64").toString("binary")
+          item.image = Buffer.from(item.image, "base64").toString("binary")
           return item
         })
       }
@@ -102,6 +102,7 @@ const getDetailClinicById = (inputId) => {
 }
 
 const editClinic = (id, data) => {
+  console.log("Id: ", id)
   return new Promise(async (resolve, reject) => {
     try {
       if (
@@ -140,7 +141,6 @@ const editClinic = (id, data) => {
         //   descriptionHTML: data.descriptionHTML,
         //   descriptionMarkdown: data.descriptionMarkdown,
         // })
-        console.log("Clinic,", id, data)
 
         resolve({
           errCode: 0,

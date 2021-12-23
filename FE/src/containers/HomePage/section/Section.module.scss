@@ -3,10 +3,10 @@
 .sectionsHomePage {
   padding: 50px 0;
   &:nth-of-type(even) {
-    background: #f6f6f6;
+    background: #fff;
   }
   &:nth-of-type(odd) {
-    background: #fff;
+    background: #f5f6fa;
   }
 
   .headerSection {

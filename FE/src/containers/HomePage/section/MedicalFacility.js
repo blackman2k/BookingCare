@@ -71,8 +71,8 @@ class MedicalFacility extends Component {
       <div
         className={clsx(
           styles.sectionsHomePage,
-          styles.medicalFacility,
-          "mt-header-section"
+          styles.medicalFacility
+          // "mt-header-section"
         )}
         id="clinics"
       >

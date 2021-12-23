@@ -84,8 +84,8 @@ class OutStandingDotor extends Component {
       <div
         className={clsx(
           styles.sectionsHomePage,
-          styles.outStandingDoctor,
-          "mt-header-section"
+          styles.outStandingDoctor
+          // "mt-header-section"
         )}
         id="doctors"
       >
