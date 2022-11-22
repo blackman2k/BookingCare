@@ -21,6 +21,7 @@ const handleLogin = async (req, res) => {
       data: {
         ...output.data,
       },
+      access_token: output.access_token,
     })
   } else {
     return res.status(500).json({

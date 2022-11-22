@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs"
 import { raw } from "body-parser"
 import db from "../models/index"
+import jwt from 'jsonwebtoken'
 
 const salt = bcrypt.genSaltSync(10) //công thức hash
 
@@ -46,7 +47,10 @@ const handleUserLogin = (email, password) => {
         output.errCode = 3
         output.errMessage = `You's email isn't exist in your system. Please try other email!`
       }
-
+      const access_token = jwt.sign({...output.data}, process.env.SECRET, {expiresIn: 60 * 60})
+      console.log({access_token})
+      output.access_token = access_token
+      console.log({output})
       resolve(output)
     } catch (e) {
       reject(e)
@@ -127,6 +131,7 @@ const createNewUser = (data) => {
       }
 
       const hashPasswordFromBcrypt = await hashUserPassword(data.password)
+      console.log({hashPasswordFromBcrypt})
       await db.User.create({
         email: data.email,
         password: hashPasswordFromBcrypt,
