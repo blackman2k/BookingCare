@@ -55,7 +55,7 @@ const getAllDoctors = () => {
 
       resolve({
         errCode: 0,
-        doctors,
+        data: doctors,
       })
     } catch (e) {
       reject(e)

@@ -29,12 +29,9 @@ const initWebRoutes = (app) => {
   router.get("/api/all-code", userController.handleGetAllCode)
 
   router.get("/api/top-doctor-home", doctorController.getTopDoctorHome)
-  router.get("/api/get-all-doctors", doctorController.getAllDoctors)
-  router.post("/api/save-infor-doctor", doctorController.postInforDoctor)
-  router.get(
-    "/api/get-detail-doctor-by-id",
-    doctorController.getDetailDoctorById
-  )
+  router.get("/api/doctors", doctorController.getAllDoctors)
+  router.post("/api/doctors", doctorController.postInforDoctor)
+  router.get("/api/doctors", doctorController.getDetailDoctorById)
   router.post("/api/bulk-create-schedule", doctorController.bulkCreateSchedule)
   router.get(
     "/api/get-schedule-doctor-by-date",
@@ -64,21 +61,15 @@ const initWebRoutes = (app) => {
   )
   router.get("/api/search", patientController.getSearch)
 
-  router.post("/api/create-new-specialty", specialtyController.createSpecialty)
-  router.put("/api/edit-specialty", specialtyController.editSpecialty)
-  router.get("/api/get-specialty", specialtyController.getAllSpecialty)
-  router.get(
-    "/api/get-detail-specialty-by-id",
-    specialtyController.getDetailSpecialtyById
-  )
+  router.post("/api/specialtys", specialtyController.createSpecialty)
+  router.put("/api/specialtys", specialtyController.editSpecialty)
+  router.get("/api/specialtys", specialtyController.getAllSpecialty)
+  router.get("/api/specialtys", specialtyController.getDetailSpecialtyById)
 
-  router.post("/api/create-new-clinic", clinicControler.createClinic)
-  router.get("/api/get-clinic", clinicControler.getAllClinic)
-  router.put("/api/edit-clinic", clinicControler.editClinic)
-  router.get(
-    "/api/get-detail-clinic-by-id",
-    clinicControler.getDetailClinicById
-  )
+  router.post("/api/clinics", clinicControler.createClinic)
+  router.get("/api/clinics", clinicControler.getAllClinic)
+  router.put("/api/clinics", clinicControler.editClinic)
+  router.get("/api/clinics", clinicControler.getDetailClinicById)
 
   return app.use("/", router)
 }
